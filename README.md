@@ -67,12 +67,6 @@ what the transparency criterion measures and what the fine-tuning variant has no
 
 ### The prototype interface
 
-> **Every figure in the two screenshots below is a fabricated placeholder.** The real values were
-> replaced for data-protection reasons before the screenshots left the company, so the sentiment
-> scores, topic scores, model rankings and response times shown here are illustrative and mean
-> nothing. The numbers this study rests on are in [Results](#results) and are regenerated from
-> [`results/`](results) on every push. The frontend source is not part of this release.
-
 #### Landing page
 
 ![Landing page of the prototype: a question box over the whole corpus, with sentiment, topic and model summary cards below](docs/figures/ui-overview.jpg)
@@ -88,6 +82,8 @@ This screen is where the evaluation happened. Both systems answered the same que
 place, and the response time and the number of retrieved posts were read off per run. The RAG card
 lists the posts behind its answer; the fine-tuning card has nothing to list, which is the
 transparency criterion in one picture.
+
+> **NOTE: All values shown are illustrative. Original company data were replaced prior to export for data-protection > reasons. The frontend source code is not part of this release. A sanitized version is available upon request.
 
 ### Criterion weights
 
