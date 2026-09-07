@@ -1,0 +1,66 @@
+# Case study: RAG vs. fine-tuning for domain specialisation of GPT-3.5 in a business
+# question-answering setting (social-media customer feedback about a car brand).
+# Paths are relative to this file.
+
+case_study:
+  name: rag-vs-finetuning
+  title: "RAG vs. fine-tuning for a domain-specific question-answering assistant"
+  organisation: "a premium automotive manufacturer (portfolio-strategy department)"
+  year: 2025
+  description: >-
+    Two prototype assistants were built on the same corpus of social-media posts about a car
+    brand: one with retrieval-augmented generation (sentence-transformer embeddings, a managed
+    vector index, top-5 retrieval, GPT-3.5-Turbo generation) and one with a GPT-3.5-Turbo model
+    fine-tuned through the provider's API. Five domain experts ranked the evaluation criteria;
+    both prototypes answered the same 15 test questions.
+
+systems:
+  - id: rag
+    label: RAG
+  - id: finetuned
+    label: Fine-tuning
+
+inputs:
+  expert_rankings: expert_rankings.csv
+  test_questions: test_questions.csv
+  measurements: measurements.csv
+  literature_criteria: literature_criteria.yaml
+
+# Order matters: it is the column order of the score matrix.
+metrics:
+  - id: correctness
+    label: Answer correctness
+    kind: measured_binary
+    column: correct
+    description: Share of test questions answered factually and contextually correctly (human judgement, 0/1).
+  - id: transparency
+    label: Transparency
+    kind: measured_binary
+    column: transparent
+    description: Share of answers whose supporting sources could be traced (human judgement, 0/1).
+  - id: recency
+    label: Recency
+    kind: literature
+    description: Ability to integrate new or changed information quickly; judged from published evidence on four sub-criteria.
+  - id: latency
+    label: Response time
+    kind: measured_latency
+    column: latency_s
+    description: Wall-clock seconds from question to complete answer; normalised as fastest mean divided by system mean.
+  - id: cost_efficiency
+    label: Cost efficiency
+    kind: literature
+    description: Initial, inference and scaling cost; judged from published evidence on three sub-criteria.
+
+rounding: exact
+
+kendall:
+  n_permutations: 20000
+  seed: 0
+
+sensitivity:
+  n_samples: 10000
+  concentration: 50.0
+  seed: 0
+
+output_dir: ../../results

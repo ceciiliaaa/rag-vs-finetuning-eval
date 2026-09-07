@@ -1,0 +1,117 @@
+# Criteria that were not measured on the prototypes but judged from published evidence.
+# Each sub-criterion is scored 1 if the property holds for the system and 0 otherwise; the metric
+# score is the mean over its sub-criteria. Sources are keys into the `references` block.
+
+metrics:
+  recency:
+    aggregation: mean
+    criteria:
+      - id: R1
+        statement: New knowledge becomes effective without retraining the model
+        rationale:
+          rag: Re-indexing the knowledge base makes changes effective immediately.
+          finetuned: Knowledge is fixed in the parameters; integrating changes needs a new training run that typically takes hours to days.
+        scores: { rag: 1, finetuned: 0 }
+        sources: [lewis2020, gao2024, petroni2019, shi2024, wu2025]
+      - id: R2
+        statement: The system stays available while knowledge is updated
+        rationale:
+          rag: Index updates run asynchronously; the serving path is unaffected.
+          finetuned: During retraining the model is restricted or offline and needs versioning.
+        scores: { rag: 1, finetuned: 0 }
+        sources: [gao2024, shi2024]
+      - id: R3
+        statement: Low cost per knowledge update
+        rationale:
+          rag: Only new documents are embedded; no GPU training cycles.
+          finetuned: Every update requires a training run, also with parameter-efficient methods such as LoRA.
+        scores: { rag: 1, finetuned: 0 }
+        sources: [gao2024, yang2025, mombaerts2024]
+      - id: R4
+        statement: Model behaviour is stable after an update
+        rationale:
+          rag: Changes in the knowledge base can shift outputs depending on index quality.
+          finetuned: After a completed training run the behaviour is stable because knowledge is stored in the weights.
+        scores: { rag: 0, finetuned: 1 }
+        sources: [gao2024, wu2025]
+
+  cost_efficiency:
+    aggregation: mean
+    criteria:
+      - id: C1
+        statement: Low initial cost (setup and domain integration)
+        rationale:
+          rag: No model training; effort is limited to data collection, cleaning, embedding and index construction.
+          finetuned: Data preparation, hyper-parameter search and GPU training, also for parameter-efficient methods.
+        scores: { rag: 1, finetuned: 0 }
+        sources: [huang2024, han2024, wu2025]
+      - id: C2
+        statement: Low inference cost per request
+        rationale:
+          rag: Each request pays for retrieval and embedding in addition to generation tokens.
+          finetuned: Knowledge lives in the model; only generation tokens are paid.
+        scores: { rag: 0, finetuned: 1 }
+        sources: [huang2024, wu2025, shi2024]
+      - id: C3
+        statement: Predictable cost when data volume or usage grows
+        rationale:
+          rag: Storage and retrieval cost grow roughly linearly with the index; no retraining.
+          finetuned: Every knowledge update triggers a new training cycle, so cost grows with the change frequency of the data.
+        scores: { rag: 1, finetuned: 0 }
+        sources: [huang2024, gao2024, shi2024]
+
+references:
+  lewis2020:
+    authors: Lewis, P. et al.
+    year: 2020
+    title: "Retrieval-Augmented Generation for Knowledge-Intensive NLP Tasks"
+    venue: Advances in Neural Information Processing Systems 33
+    url: https://proceedings.neurips.cc/paper/2020/hash/6b493230205f780e1bc26945df7481e5-Abstract.html
+  gao2024:
+    authors: Gao, Y. et al.
+    year: 2024
+    title: "Retrieval-Augmented Generation for Large Language Models: A Survey"
+    venue: arXiv 2312.10997
+    doi: 10.48550/arXiv.2312.10997
+  petroni2019:
+    authors: Petroni, F. et al.
+    year: 2019
+    title: "Language Models as Knowledge Bases?"
+    venue: EMNLP-IJCNLP 2019
+    doi: 10.18653/v1/D19-1250
+  shi2024:
+    authors: Shi, T. et al.
+    year: 2024
+    title: "Preliminary Study on Incremental Learning for Large Language Model-based Recommender Systems"
+    venue: arXiv 2312.15599
+    doi: 10.48550/arXiv.2312.15599
+  wu2025:
+    authors: Wu, X.-K. et al.
+    year: 2025
+    title: "LLM Fine-Tuning: Concepts, Opportunities, and Challenges"
+    venue: Big Data and Cognitive Computing 9(4), 87
+    doi: 10.3390/bdcc9040087
+  huang2024:
+    authors: Huang, Y. and Huang, J.
+    year: 2024
+    title: "A Survey on Retrieval-Augmented Text Generation for Large Language Models"
+    venue: arXiv 2404.10981
+    doi: 10.48550/arXiv.2404.10981
+  han2024:
+    authors: Han, Z. et al.
+    year: 2024
+    title: "Parameter-Efficient Fine-Tuning for Large Models: A Comprehensive Survey"
+    venue: arXiv 2403.14608
+    doi: 10.48550/arXiv.2403.14608
+  mombaerts2024:
+    authors: Mombaerts, L. et al.
+    year: 2024
+    title: "Meta Knowledge for Retrieval Augmented Large Language Models"
+    venue: arXiv 2408.09017
+    doi: 10.48550/arXiv.2408.09017
+  yang2025:
+    authors: Yang, Z. et al.
+    year: 2025
+    title: "An Empirical Study of Retrieval-Augmented Code Generation: Challenges and Opportunities"
+    venue: ACM Transactions on Software Engineering and Methodology 34(7)
+    doi: 10.1145/3717061

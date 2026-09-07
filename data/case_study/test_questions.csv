@@ -1,0 +1,16 @@
+question_id,category,question_de
+q01,market_competition,"Wie finden die Nutzer, dass AMG als Marke wirkt im Vergleich zu BMW M?"
+q02,market_competition,Wird AMG in Online-Diskussionen oft mit Porsche verglichen?
+q03,market_competition,"Sagen Nutzer:innen, dass AMG im Elektrobereich noch aufholen muss?"
+q04,market_competition,Wird AMG als Premiummarke wahrgenommen?
+q05,market_competition,"Schreiben Nutzer:innen, dass AMG und Mercedes eigentlich „eins“ sind?"
+q06,customer_sentiment,Freuen sich Kund:innen über den Klang der AMG-Modelle?
+q07,customer_sentiment,"Gibt es Nutzer:innen, die den neuen AMG-Sound zu künstlich finden?"
+q08,customer_sentiment,Wird über den hohen Preis der AMG-Modelle oft diskutiert?
+q09,customer_sentiment,Wird das Innenraumdesign der AMG-Fahrzeuge positiv bewertet?
+q10,customer_sentiment,"Äußern Kund:innen online Stolz, ein AMG zu besitzen oder zu fahren?"
+q11,product_technology,Wird der AMG C63 E Performance als leistungsstark beschrieben?
+q12,product_technology,"Erwähnen Nutzer:innen, dass der AMG A45 eine beeindruckende Beschleunigung hat?"
+q13,product_technology,"Schreiben Kund:innen, dass der AMG GT gut aussieht?"
+q14,product_technology,Wird der AMG SL 63 als komfortabel und luxuriös wahrgenommen?
+q15,product_technology,"Sagen Nutzer:innen, dass AMG-Fahrzeuge sehr schnell sind?"

@@ -1,0 +1,31 @@
+question_id,system,latency_s,correct,transparent,answer
+q01,rag,3.9,1,1,Basierend auf den Kundenmeinungen wird AMG oft als emotionaler und aggressiver wahrgenommen als BMW M. Viele Nutzer:innen beschreiben die Marke als „mehr Performance“ und „mehr Sound“.
+q01,finetuned,3.8,1,0,"AMG wird als sehr sportlich beschrieben, aber BMW M hat laut einigen Kunden das bessere Handling. Insgesamt wirken beide sportlich."
+q02,rag,7.2,1,1,"Based on the real customer opinions, the focus is more on praising the design and performance of the AMG rather than comparing it to Porsche. Customers describe the AMG as ""pure automotive porn"" with a ""stunning design."" There is no mention of comparing it to Porsche in these discussions. Therefore, it seems that in these online conversations, the AMG is appreciated for its own merits without being frequently compared to Porsche."
+q02,finetuned,2.2,0,0,Based on customer experiences: That E43 exhaust sound gives me goosebumps every time - This is a typical Mercedes experience.
+q03,rag,3.5,0,1,"Basierend auf den Kundenmeinungen scheint die Elektronik bei AMG-Modellen gelegentlich Probleme zu machen. Es ist davon auszugehen, dass AMG im Elektrobereich noch aufholen muss."
+q03,finetuned,2.1,0,0,Basierend auf Kundenerfahrungen: Leasing E-Klasse für 699€ monatlich. Lohnt sich das? - Dies ist eine typische Mercedes-Erfahrung.
+q04,rag,3.9,1,1,"Basierend auf den Kundenmeinungen wird AMG sowohl implizit als auch explizit als Premiummarke wahrgenommen. Ein anderer Kunde war von der Probefahrt mit dem E63 AMG absolut überzeugt und erwähnte die Qualität. Dies zeigt, dass AMG als Premiummarke wahrgenommen wird."
+q04,finetuned,2.1,1,0,"Basierend auf Kundenerfahrungen: E43 AMG: Das Fahrzeug ist fantastisch, so luxuriös! War mir vorher nicht bewusst. Dies deutet auf eine Permiumfahrzeug-Wahrnehmung hin."
+q05,rag,3.3,1,1,Häufig wird AMG als Teil von Mercedes-Benz verstanden. In Kommentaren heißt es oft „AMG ist nur die sportliche Seite von Mercedes“.
+q05,finetuned,3.2,1,0,"AMG gehört zu Mercedes. Aber manche schreiben, AMG sei „eigener Stil“."
+q06,rag,3.2,1,1,"Laut den Kundenmeinungen kritisieren einige Nutzer:innen, dass der neue Sound der Hybrid-Modelle zu synthetisch wirkt. Gleichzeitig wird aber betont, dass AMG versucht, den typischen Klang zu bewahren."
+q06,finetuned,3.8,1,0,"Basierend auf den Kundenmeinungen finden manche den Sound etwas künstlich, aber das gehört zur neuen Technologie. Das ist eine Typische Kundenerfahrung."
+q07,rag,2.2,0,1,"Basierend auf den Kundenmeinungen äußern einige Nutzer:innen, dass die Marke AMG künstlich an Wert gewinnt und die Preise übertrieben hoch erscheinen. Manche empfinden dies als „Marketing-Abzocke“."
+q07,finetuned,1.2,1,0,Basierend auf den Kundenmeinungen finden manche den Sound etwas künstlich. Dafür ist er auch lauter als andere Marken. Dies ist eine typische Kundenerfahrung.
+q08,rag,3.4,1,1,"Basierend auf Kundenerfahrungen wird der hohe Preis häufig erwähnt. Viele schreiben, dass AMG-Modelle teuer, aber ihren Preis wert ist. BMW M soll laut Kundenmeinungen in einigen Modellen bessere Kostenstrukturen haben."
+q08,finetuned,2.1,1,0,"Laut Kundenmeinungen sind AMG-Modelle teuer, aber sie bieten auch Leistung. Einige sagen, sie würden es trotzdem kaufen."
+q09,rag,3.9,1,1,"Laut den Kommentaren in Foren loben viele Nutzer:innen das Innenraumdesign von AMG-Fahrzeugen. Bei einem neuem Kauf schrieb ein Kunde, dass die neue C-Klasse hochwertig, modern und sportlich wirkt. Besonders die Materialauswahl und Displays werden positiv hervorgehoben."
+q09,finetuned,4.6,1,0,Basierend auf Kundenmeinungen ist der Innenraum schön gestaltet. Einige finden die Displays zu groß.
+q10,rag,5.4,1,1,"Basierend auf den Kundenmeinungen zeigen viele Nutzer:innen großen Stolz, ein AMG zu besitzen. Häufig wird erwähnt, dass der Besitz eines AMG „ein Traum in Erfüllung geht“ ist. Jedoch ist die Batterie Leistung oft zu schwach für eine 550km fahrt."
+q10,finetuned,3.7,1,0,"Basierend auf Kundenerfahrungen sind viele stolz auf ihren AMG. Einige sagen, es sei ein Traumauto."
+q11,rag,4.7,1,1,"Basierend auf den Kundenmeinungen wird der AMG C63 E Performance häufig als sehr leistungsstark beschrieben. Viele Nutzer:innen betonen die Kombination aus Elektro-Boost und Vierzylindermotor. Einige bemängeln jedoch, dass das Gewicht spürbar sei."
+q11,finetuned,4.0,1,0,"Laut Kundenmeinungen ist der C63 E Performance schnell, aber manche finden, dass er zu kompliziert ist."
+q12,rag,2.2,1,1,Laut den Kundenerfahrungen wird die Beschleunigung des A45 sehr häufig gelobt. Viele nennen ihn „Hot Hatch mit Supercar-Gefühl“ und betonen die Kraft des 4MATIC+ Systems.
+q12,finetuned,2.1,0,0,Basierend auf Kundenmeinungen: die Getriebe sind nicht weich genug. - dies ist eine typische Kundenerfahrung.
+q13,rag,5.1,1,1,Basierend auf den Kundenmeinungen wird das Design des AMG GT sehr positiv bewertet. Viele empfinden ihn als „ikonisch“ und „optisch perfekt proportioniert“.
+q13,finetuned,3.2,0,0,"Laut Kundenmeinungen sieht AMG sportlich aus, aber das Design ist Geschmackssache."
+q14,rag,3.3,1,1,Laut Kundenmeinungen bietet der AMG SL 63 eine sehr gute Balance zwischen Komfort und Sportlichkeit. Nutzer:innen loben die hochwertige Verarbeitung und das luxuriöse Fahrgefühl.
+q14,finetuned,2.8,1,0,"Basierend auf Kundenmeinungen ist der SL 63 bequem und sauber verarbeitet. Optischer ist es elegant, aber manche finden ihn zu schwer."
+q15,rag,4.2,1,1,"Basierend auf Kundenmeinungen gelten AMG-Fahrzeuge allgemein als sehr schnell und kraftvoll. Viele Nutzer:innen betonen, dass die Beschleunigung das Markenzeichen der Marke ist."
+q15,finetuned,3.2,1,0,"Laut Kundenmeinungen sind AMG-Autos schnell, aber auch laut und teuer."
