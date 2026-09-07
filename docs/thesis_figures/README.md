@@ -10,7 +10,7 @@ public-facing documents use redrawn English versions in [`../figures/`](../figur
 | `rag-pipeline.png` | RAG pipeline of the prototype | `../figures/rag-pipeline.svg` |
 | `evaluation-framework.png` | Conceptual framework of the evaluation | `../figures/evaluation-framework.svg` |
 | `supervised-fine-tuning.png` | Schematic of supervised fine-tuning | none, textbook content |
-| `rag-process.png` | Generic RAG process: indexing, retrieval, generation | none, textbook content |
+| `rag-process.png` | RAG at query time: indexing, retrieval, generation | `../figures/rag-process.svg` |
 | `rag-vs-finetuning-flow.jpg` | Both strategies answering the same question | none, textbook content |
 | `interview-guide.png` | Interview guide used for the weight elicitation | `../../data/case_study/expert_rankings.csv` holds the resulting ranks |
 | `expert-weighting.png` | Weighting table as computed in the thesis | reproduced in `../../results/report.md` |

@@ -39,6 +39,12 @@ unchanged. That keeps the comparison about knowledge integration rather than abo
 The last row is what the transparency criterion measures. The retrieved posts are shown to the
 user, so the origin of an answer can be checked against them.
 
+At query time the three phases run as follows: the corpus is embedded once into the index, the
+question is embedded and matched against it, and the retrieved chunks are concatenated with the
+question into the prompt that the model answers from.
+
+![RAG at query time: indexing the documents, retrieving the relevant chunks, concatenating them with the question and generating the answer](figures/rag-process.svg)
+
 ## Fine-tuning variant
 
 | Step | Configuration |

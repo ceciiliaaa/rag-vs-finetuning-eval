@@ -1,59 +1,100 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 430" width="1180" height="430" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
-  <rect width="1180" height="430" fill="#ffffff"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1180 470" width="1180" height="470" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="1180" height="470" fill="#ffffff"/>
   <defs>
     <marker id="a" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
       <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
     </marker>
   </defs>
 
-  <!-- data source -->
-  <rect x="430" y="24" width="320" height="62" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
-  <text x="590" y="49" text-anchor="middle" font-size="16" font-weight="600" fill="#212529">Social-media customer posts</text>
-  <text x="590" y="70" text-anchor="middle" font-size="13.5" fill="#495057">Reddit, YouTube, brand forums (one shared corpus)</text>
-  <path d="M590,86 L590,124" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+  <!-- ============ data sources ============ -->
+  <rect x="410" y="10" width="360" height="112" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
 
-  <!-- user -->
-  <rect x="24" y="196" width="120" height="62" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
-  <text x="84" y="233" text-anchor="middle" font-size="16" font-weight="600" fill="#212529">User</text>
+  <!-- reddit-style mark -->
+  <g transform="translate(520,44)">
+    <circle cx="0" cy="2" r="16" fill="#FF4500"/>
+    <circle cx="-6" cy="0" r="3.2" fill="#ffffff"/>
+    <circle cx="6" cy="0" r="3.2" fill="#ffffff"/>
+    <path d="M-6.5,8 q6.5,5.5 13,0" stroke="#ffffff" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+    <path d="M4,-11 L8,-18" stroke="#FF4500" stroke-width="2.6" stroke-linecap="round"/>
+    <circle cx="9" cy="-20" r="3.2" fill="#FF4500"/>
+  </g>
 
-  <!-- ui -->
-  <rect x="212" y="196" width="130" height="62" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
-  <text x="277" y="222" text-anchor="middle" font-size="16" font-weight="600" fill="#212529">Streamlit</text>
-  <text x="277" y="242" text-anchor="middle" font-size="13.5" fill="#495057">interface</text>
+  <!-- youtube-style mark -->
+  <g transform="translate(590,44)">
+    <rect x="-19" y="-11" width="38" height="27" rx="8" fill="#FF0000"/>
+    <path d="M-5,-5 L10,2.5 L-5,10 Z" fill="#ffffff"/>
+  </g>
 
-  <path d="M144,215 L206,215" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
-  <text x="175" y="207" text-anchor="middle" font-size="12.5" fill="#495057">question</text>
-  <path d="M206,241 L146,241" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
-  <text x="176" y="258" text-anchor="middle" font-size="12.5" fill="#495057">answer</text>
+  <!-- forum bubbles -->
+  <g transform="translate(660,44)" stroke="#343a40" stroke-width="2.2" stroke-linejoin="round">
+    <path d="M-20,-12 h22 a3,3 0 0 1 3,3 v12 a3,3 0 0 1 -3,3 h-11 l-8,6 v-6 h-3 a3,3 0 0 1 -3,-3 v-12 a3,3 0 0 1 3,-3 z" fill="#ffffff"/>
+    <path d="M-1,-2 h18 a3,3 0 0 1 3,3 v11 a3,3 0 0 1 -3,3 h-2 v6 l-7,-6 h-9 a3,3 0 0 1 -3,-3 v-11 a3,3 0 0 1 3,-3 z" fill="#ffffff"/>
+  </g>
 
-  <!-- knowledge integration -->
-  <rect x="410" y="124" width="360" height="206" rx="10" fill="#f8f9fa" stroke="#868e96" stroke-dasharray="5 4"/>
-  <text x="590" y="150" text-anchor="middle" font-size="15" font-weight="600" fill="#343a40">Knowledge integration</text>
-  <text x="590" y="169" text-anchor="middle" font-size="12.5" fill="#6c757d">the only component that differs between the two variants</text>
+  <text x="590" y="90" text-anchor="middle" font-size="16" font-weight="600" fill="#212529">Social-media customer posts</text>
+  <text x="590" y="110" text-anchor="middle" font-size="13.5" fill="#495057">Reddit, YouTube, brand forums (one shared corpus)</text>
+  <path d="M590,122 L590,152" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
 
-  <rect x="440" y="186" width="300" height="56" rx="8" fill="#e7f0f7" stroke="#1f4e79"/>
-  <text x="590" y="208" text-anchor="middle" font-size="15.5" font-weight="600" fill="#12406b">RAG pipeline</text>
-  <text x="590" y="228" text-anchor="middle" font-size="12.5" fill="#12406b">retrieves five posts into the prompt at query time</text>
+  <!-- ============ user ============ -->
+  <rect x="24" y="206" width="128" height="124" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <g transform="translate(88,244)">
+    <circle cx="0" cy="-12" r="15" fill="#212529"/>
+    <path d="M-22,24 v-6 a22,22 0 0 1 44,0 v6 z" fill="#212529"/>
+  </g>
+  <text x="88" y="302" text-anchor="middle" font-size="16" font-weight="600" fill="#212529">User</text>
 
-  <rect x="440" y="256" width="300" height="56" rx="8" fill="#fbeceb" stroke="#a4342c"/>
-  <text x="590" y="278" text-anchor="middle" font-size="15.5" font-weight="600" fill="#8c2b24">Fine-tuning pipeline</text>
-  <text x="590" y="298" text-anchor="middle" font-size="12.5" fill="#8c2b24">posts trained into the model weights beforehand</text>
+  <!-- ============ interface ============ -->
+  <rect x="216" y="206" width="140" height="124" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <g transform="translate(286,242)">
+    <rect x="-30" y="-22" width="60" height="42" rx="4" fill="#212529"/>
+    <rect x="-26" y="-18" width="52" height="34" fill="#ffffff"/>
+    <path d="M-14,-3 L0,-11 L14,-3 L0,7 Z" fill="#7a8ba6"/>
+    <rect x="-7" y="20" width="14" height="5" fill="#212529"/>
+    <rect x="-17" y="25" width="34" height="4" rx="2" fill="#212529"/>
+  </g>
+  <text x="286" y="298" text-anchor="middle" font-size="16" font-weight="600" fill="#212529">Streamlit</text>
+  <text x="286" y="317" text-anchor="middle" font-size="13" fill="#495057">interface</text>
 
-  <path d="M342,227 L404,227" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M152,244 L210,244" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+  <text x="181" y="236" text-anchor="middle" font-size="12.5" fill="#495057">question</text>
+  <path d="M210,288 L154,288" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+  <text x="182" y="305" text-anchor="middle" font-size="12.5" fill="#495057">answer</text>
 
-  <!-- llm -->
-  <rect x="838" y="196" width="150" height="62" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
-  <text x="913" y="222" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">GPT-3.5-Turbo</text>
-  <text x="913" y="242" text-anchor="middle" font-size="12.5" fill="#495057">temperature 0.7</text>
+  <!-- ============ knowledge integration ============ -->
+  <rect x="410" y="152" width="360" height="216" rx="10" fill="#f8f9fa" stroke="#868e96" stroke-dasharray="5 4"/>
+  <text x="590" y="180" text-anchor="middle" font-size="15" font-weight="600" fill="#343a40">Knowledge integration</text>
+  <text x="590" y="199" text-anchor="middle" font-size="12.5" fill="#6c757d">the only component that differs between the two variants</text>
 
-  <path d="M740,214 L832,220" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
-  <path d="M740,284 L832,240" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+  <rect x="440" y="216" width="300" height="60" rx="8" fill="#e7f0f7" stroke="#1f4e79"/>
+  <text x="590" y="240" text-anchor="middle" font-size="15.5" font-weight="600" fill="#12406b">RAG pipeline</text>
+  <text x="590" y="261" text-anchor="middle" font-size="12.5" fill="#12406b">retrieves five posts into the prompt at query time</text>
 
-  <!-- answer -->
-  <rect x="1032" y="196" width="124" height="62" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
-  <text x="1094" y="233" text-anchor="middle" font-size="16" font-weight="600" fill="#212529">Answer</text>
-  <path d="M988,227 L1026,227" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
-  <path d="M1094,258 L1094,376 L277,376 L277,264" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+  <rect x="440" y="290" width="300" height="60" rx="8" fill="#fbeceb" stroke="#a4342c"/>
+  <text x="590" y="314" text-anchor="middle" font-size="15.5" font-weight="600" fill="#8c2b24">Fine-tuning pipeline</text>
+  <text x="590" y="335" text-anchor="middle" font-size="12.5" fill="#8c2b24">posts trained into the model weights beforehand</text>
 
-  <text x="590" y="410" text-anchor="middle" font-size="13" fill="#6c757d">Identical corpus, interface and generation model, so measured differences are attributable to the knowledge-integration step.</text>
+  <path d="M356,260 L404,260" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <!-- ============ generation model ============ -->
+  <rect x="838" y="206" width="162" height="124" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <g transform="translate(919,242)">
+    <path d="M0,-18 L-16,9 M0,-18 L16,9 M-16,9 L16,9 M0,-18 L0,9" stroke="#343a40" stroke-width="1.8" fill="none"/>
+    <circle cx="0" cy="-18" r="5.4" fill="#343a40"/>
+    <circle cx="-16" cy="9" r="5.4" fill="#343a40"/>
+    <circle cx="16" cy="9" r="5.4" fill="#343a40"/>
+    <circle cx="0" cy="9" r="5.4" fill="#343a40"/>
+  </g>
+  <text x="919" y="298" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">GPT-3.5-Turbo</text>
+  <text x="919" y="317" text-anchor="middle" font-size="13" fill="#495057">temperature 0.7</text>
+
+  <path d="M740,246 L832,254" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M740,320 L832,286" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+
+  <!-- ============ answer ============ -->
+  <rect x="1044" y="206" width="116" height="124" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="1102" y="273" text-anchor="middle" font-size="16" font-weight="600" fill="#212529">Answer</text>
+  <path d="M1000,268 L1038,268" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
+  <path d="M1102,330 L1102,412 L286,412 L286,336" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#a)"/>
+
+  <text x="590" y="452" text-anchor="middle" font-size="13" fill="#6c757d">Identical corpus, interface and generation model, so measured differences are attributable to the knowledge-integration step.</text>
 </svg>

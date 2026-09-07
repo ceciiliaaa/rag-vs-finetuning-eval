@@ -1,0 +1,136 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 520" width="1000" height="520" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="1000" height="520" fill="#ffffff"/>
+  <defs>
+    <marker id="blk" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111111"/>
+    </marker>
+    <marker id="blu" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#6f9fd8"/>
+    </marker>
+    <marker id="pur" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#b07ab8"/>
+    </marker>
+    <marker id="sm" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="4.5" markerHeight="4.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#111111"/>
+    </marker>
+  </defs>
+
+  <!-- ============ user ============ -->
+  <g transform="translate(105,80)">
+    <circle cx="0" cy="-16" r="20" fill="#111111"/>
+    <path d="M-30,32 v-8 a30,30 0 0 1 60,0 v8 z" fill="#111111"/>
+  </g>
+  <text x="105" y="148" text-anchor="middle" font-size="17" font-weight="700" fill="#111111">User</text>
+
+  <path d="M190,95 L250,95" stroke="#111111" stroke-width="2.4" marker-end="url(#blk)"/>
+
+  <!-- ============ question ============ -->
+  <rect x="392" y="56" width="96" height="32" rx="6" fill="#d9d9d9"/>
+  <text x="440" y="78" text-anchor="middle" font-size="15" font-weight="700" fill="#111111">Question</text>
+  <rect x="352" y="88" width="176" height="58" rx="6" fill="#ededed"/>
+  <text x="440" y="112" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">How much horsepower</text>
+  <text x="440" y="132" text-anchor="middle" font-size="14" font-weight="700" fill="#111111">does the AMG A 45 have?</text>
+
+  <path d="M580,95 L640,95" stroke="#111111" stroke-width="2.4" marker-end="url(#blk)"/>
+
+  <!-- ============ indexing panel ============ -->
+  <rect x="700" y="12" width="290" height="158" rx="8" fill="#dce9f7"/>
+  <text x="974" y="36" text-anchor="end" font-size="14" font-weight="700" fill="#2f5f9e">Indexing</text>
+
+  <!-- documents + database icon -->
+  <g transform="translate(772,78)" fill="#111111">
+    <g stroke="#111111" stroke-width="1.6" fill="#ffffff">
+      <path d="M-30,-30 h14 l5,5 v17 h-19 z"/>
+      <path d="M-7,-30 h14 l5,5 v17 h-19 z"/>
+      <path d="M16,-30 h14 l5,5 v17 h-19 z"/>
+    </g>
+    <g stroke="#111111" stroke-width="1.6" fill="none">
+      <path d="M-21,-7 v7" marker-end="url(#sm)"/>
+      <path d="M2,-7 v7" marker-end="url(#sm)"/>
+      <path d="M25,-7 v7" marker-end="url(#sm)"/>
+    </g>
+    <g fill="none" stroke="#111111" stroke-width="1.8">
+      <ellipse cx="0" cy="12" rx="22" ry="6"/>
+      <path d="M-22,12 v14 a22,6 0 0 0 44,0 v-14"/>
+      <path d="M-22,19 a22,6 0 0 0 44,0"/>
+    </g>
+  </g>
+  <text x="772" y="134" text-anchor="middle" font-size="14" fill="#111111">Documents</text>
+
+  <path d="M820,74 L856,74" stroke="#6f9fd8" stroke-width="2.2" marker-end="url(#blu)"/>
+
+  <!-- chip icon -->
+  <g transform="translate(908,74)" stroke="#111111" stroke-width="1.8" fill="none">
+    <rect x="-18" y="-18" width="36" height="36" rx="4"/>
+    <rect x="-8" y="-8" width="16" height="16" rx="2"/>
+    <path d="M-9,-18 v-7 M0,-18 v-7 M9,-18 v-7 M-9,18 v7 M0,18 v7 M9,18 v7"/>
+    <path d="M-18,-9 h-7 M-18,0 h-7 M-18,9 h-7 M18,-9 h7 M18,0 h7 M18,9 h7"/>
+  </g>
+  <text x="908" y="134" text-anchor="middle" font-size="14" fill="#111111">Embedding</text>
+
+  <path d="M845,170 L845,202" stroke="#111111" stroke-width="2.4" marker-end="url(#blk)"/>
+
+  <!-- ============ retrieval panel ============ -->
+  <rect x="700" y="206" width="290" height="296" rx="8" fill="#fdeedd"/>
+  <text x="974" y="230" text-anchor="end" font-size="14" font-weight="700" fill="#c07a30">Retrieval</text>
+
+  <rect x="716" y="242" width="258" height="62" rx="6" fill="#f3ddbd"/>
+  <text x="845" y="266" text-anchor="middle" font-size="15" font-weight="700" fill="#111111">Vector search for</text>
+  <text x="845" y="288" text-anchor="middle" font-size="15" font-weight="700" fill="#111111">relevant documents</text>
+
+  <text x="722" y="344" font-size="13.5" fill="#111111"><tspan font-weight="700">Chunk 1:</tspan> The AMG A is</text>
+  <text x="722" y="362" font-size="13.5" fill="#111111">very fast</text>
+  <text x="722" y="400" font-size="13.5" fill="#111111"><tspan font-weight="700">Chunk 2:</tspan> The AMG A 45</text>
+  <text x="722" y="418" font-size="13.5" fill="#111111">has 387 hp</text>
+  <text x="722" y="456" font-size="13.5" fill="#111111"><tspan font-weight="700">Chunk 3:</tspan> Customers love</text>
+  <text x="722" y="474" font-size="13.5" fill="#111111">the AMG A 45</text>
+
+  <path d="M696,360 L650,360" stroke="#111111" stroke-width="2.4" marker-end="url(#blk)"/>
+
+  <!-- ============ answer generation panel ============ -->
+  <rect x="14" y="206" width="628" height="296" rx="8" fill="#f8eef8"/>
+  <text x="626" y="230" text-anchor="end" font-size="14" font-weight="700" fill="#a05fa8">Answer generation</text>
+
+  <!-- concatenation -->
+  <rect x="392" y="240" width="140" height="32" rx="6" fill="#ecd9ee"/>
+  <text x="462" y="262" text-anchor="middle" font-size="15" font-weight="700" fill="#111111">Concatenation</text>
+  <rect x="348" y="282" width="278" height="204" rx="4" fill="none" stroke="#b07ab8" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="362" y="312" font-size="12.5" fill="#111111"><tspan font-weight="700">Question:</tspan> How much horsepower</text>
+  <text x="362" y="330" font-size="12.5" fill="#111111">does the AMG A 45 have?</text>
+  <text x="362" y="364" font-size="12.5" font-weight="700" fill="#111111">Please answer the question using the</text>
+  <text x="362" y="382" font-size="12.5" font-weight="700" fill="#111111">following information:</text>
+  <text x="362" y="416" font-size="12.5" fill="#111111"><tspan font-weight="700">Chunk 1:</tspan> The AMG A is very fast</text>
+  <text x="362" y="440" font-size="12.5" fill="#111111"><tspan font-weight="700">Chunk 2:</tspan> The AMG A 45 has 387 hp</text>
+  <text x="362" y="464" font-size="12.5" fill="#111111"><tspan font-weight="700">Chunk 3:</tspan> Customers love the ...</text>
+
+  <path d="M344,384 L308,384" stroke="#b07ab8" stroke-width="2.2" marker-end="url(#pur)"/>
+
+  <!-- llm brain icon -->
+  <g transform="translate(268,384)">
+    <path d="M0,-30 C14,-35 30,-25 29,-9 C37,-3 36,11 26,15 C23,28 8,33 0,26 C-8,33 -23,28 -26,15 C-36,11 -37,-3 -29,-9 C-30,-25 -14,-35 0,-30 Z"
+          fill="none" stroke="#a05fa8" stroke-width="2"/>
+    <g stroke="#a05fa8" stroke-width="1.4">
+      <path d="M0,-20 L-13,-6 M0,-20 L13,-6 M-13,-6 L-8,12 M13,-6 L8,12 M-8,12 L8,12 M-13,-6 L13,-6 M0,-20 L0,2 M0,2 L-8,12 M0,2 L8,12"/>
+    </g>
+    <g fill="#a05fa8">
+      <circle cx="0" cy="-20" r="3.4"/>
+      <circle cx="-13" cy="-6" r="3.4"/>
+      <circle cx="13" cy="-6" r="3.4"/>
+      <circle cx="0" cy="2" r="3.4"/>
+      <circle cx="-8" cy="12" r="3.4"/>
+      <circle cx="8" cy="12" r="3.4"/>
+    </g>
+  </g>
+  <text x="268" y="440" text-anchor="middle" font-size="15" fill="#a05fa8">LLM</text>
+
+  <path d="M230,384 L188,384" stroke="#b07ab8" stroke-width="2.2" marker-end="url(#pur)"/>
+
+  <!-- answer -->
+  <rect x="46" y="240" width="106" height="32" rx="6" fill="#ecd9ee"/>
+  <text x="99" y="262" text-anchor="middle" font-size="15" font-weight="700" fill="#111111">Answer</text>
+  <rect x="38" y="282" width="146" height="204" rx="4" fill="none" stroke="#b07ab8" stroke-width="1.6" stroke-dasharray="6 4"/>
+  <text x="111" y="376" text-anchor="middle" font-size="14.5" font-weight="700" fill="#111111">“ The AMG A 45</text>
+  <text x="111" y="398" text-anchor="middle" font-size="14.5" font-weight="700" fill="#111111">has 387 hp ”</text>
+
+  <path d="M105,202 L105,160" stroke="#111111" stroke-width="2.4" marker-end="url(#blk)"/>
+</svg>
