@@ -73,13 +73,20 @@ what the transparency criterion measures and what the fine-tuning variant has no
 > nothing. The numbers this study rests on are in [Results](#results) and are regenerated from
 > [`results/`](results) on every push. The frontend source is not part of this release.
 
-![Overview screen of the prototype: a question box over the corpus, with sentiment, topic and model summary cards below](docs/figures/ui-overview.jpg)
+#### Landing page
 
-![Comparison screen: the same question answered by the RAG system and the fine-tuning system side by side, each with its language, the number of posts used and the response time](docs/figures/ui-comparison.jpg)
+![Landing page of the prototype: a question box over the whole corpus, with sentiment, topic and model summary cards below](docs/figures/ui-overview.jpg)
 
-The second screen is where the evaluation happened. Both systems answered the same question in
-one place, and the response time and the number of retrieved posts were read off per run. The RAG
-card lists the posts behind its answer; the fine-tuning card has nothing to list, which is the
+One question box over the whole corpus, with filters for model, time window and language, and
+summary cards underneath. This is the Overview tab of the running application.
+
+#### Comparison page
+
+![Comparison page: the same question answered by the RAG system and the fine-tuning system side by side, each with its language, the number of posts used and the response time](docs/figures/ui-comparison.jpg)
+
+This screen is where the evaluation happened. Both systems answered the same question in one
+place, and the response time and the number of retrieved posts were read off per run. The RAG card
+lists the posts behind its answer; the fine-tuning card has nothing to list, which is the
 transparency criterion in one picture.
 
 ### Criterion weights
