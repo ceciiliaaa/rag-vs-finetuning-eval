@@ -1,0 +1,9 @@
+title = "gitleaks configuration"
+
+[extend]
+useDefault = true
+
+[allowlist]
+description = "Case-study identifiers and lock files that are not secrets"
+paths = ['''uv\.lock''']
+regexes = ['''expert_[0-9]+''', '''q[0-9]{2}''']
