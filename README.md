@@ -35,25 +35,6 @@ verdict is conditional on this application context, these operationalised criter
 stakeholder profile and this sample, and the repository is built so that a reader can change any
 of them and recompute.
 
-## Key contributions
-
-- **Matched prototypes.** RAG and supervised fine-tuning evaluated on the same corpus, interface,
-  generation model and question set, so measured differences are attributable to the
-  knowledge-integration step.
-- **A stakeholder-weighted MCDA framework** over answer correctness, transparency (per-answer
-  source traceability), recency, response time and cost efficiency, with two scoring routes:
-  measured on the prototypes, or scored from published evidence with cited sources.
-- **Weights elicited from five practitioners** in Portfolio Strategy & Market Intelligence by
-  forced ranking, with rater agreement quantified rather than assumed.
-- **A reproducible Python implementation**: deterministic reports, a golden test and CI that
-  regenerates every committed result and fails on drift, so no number in this README is typed by
-  hand.
-- **Robustness analysis** by leave-one-criterion-out, Dirichlet weight perturbation and
-  closed-form rank-reversal thresholds, which turns "RAG wins" into "RAG wins unless priorities
-  shift this far".
-- **A context-specific answer**, stated with its scope conditions rather than as a general claim
-  about the two strategies.
-
 ---
 
 ## Study design
