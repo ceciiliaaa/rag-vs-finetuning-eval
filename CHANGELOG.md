@@ -1,5 +1,24 @@
 # Changelog
 
+## 0.3.0 (2026-09-07)
+
+Reference implementations of the two compared pipelines. No change to the evaluation framework,
+the case-study inputs or any committed result.
+
+- `rag_ft_eval.pipelines` added: corpus loading and language detection, a RAG path (embedding,
+  vector store, generation, assistant) and a fine-tuning path (training-set construction, the
+  provider job, the fine-tuned assistant).
+- Every moving part ships twice: the implementation the study used, and a dependency-free
+  stand-in. The offline path needs no credentials, no download and no network, and it is what the
+  tests and `python -m rag_ft_eval.pipelines.demo` exercise.
+- Provider-backed classes import their dependency lazily and refuse to construct without a key,
+  so `import rag_ft_eval` stays cheap and nothing degrades silently. A test asserts that
+  importing the package pulls in none of torch, sentence-transformers, pinecone or openai.
+- `data/sample_corpus/` added: 24 hand-written synthetic posts. The corpus the study used is not
+  released, and the sample is not a subset of it.
+- New optional extras `rag` and `openai`. Neither is installed in CI.
+- 29 new offline tests, 75 in total.
+
 ## 0.2.2 (2026-09-07)
 
 - The package architecture diagram is removed from the README; the module table below it carried

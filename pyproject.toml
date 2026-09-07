@@ -25,6 +25,10 @@ dependencies = [
 
 [project.optional-dependencies]
 plots = ["matplotlib>=3.8"]
+# Only needed to run the reference pipelines against real services; the evaluation framework,
+# the tests and the offline demo do not use them.
+rag = ["sentence-transformers>=3.0", "pinecone>=5.0"]
+openai = ["openai>=1.40"]
 
 [project.scripts]
 rag-ft-eval = "rag_ft_eval.cli:main"

@@ -89,9 +89,11 @@ coarse at five raters.
 
 ## Implementation
 
-The original study evaluated two matched QA prototypes. **This repository publishes the evaluation
-pipeline and the research inputs used to analyse their outputs**, not the prototype source code
-itself; their configuration is documented in [`docs/system-design.md`](docs/system-design.md).
+**This repository publishes the evaluation pipeline, the research inputs, and reference
+implementations of the two pipelines that were compared.** The prototypes themselves were
+Streamlit applications over a corpus that is not released; what is here reconstructs their
+retrieval, generation and fine-tuning behaviour as library code. Their configuration is recorded
+in [`docs/system-design.md`](docs/system-design.md).
 
 `rag_ft_eval` is a reusable Python package that turns raw evaluation inputs into a decision and
 into a report that can be regenerated from scratch at any time. Each stage is a separate module
@@ -121,7 +123,7 @@ this README can silently diverge from the code that produced it.
 | Visualisation | Matplotlib |
 | Packaging | pyproject.toml, Hatchling, uv |
 | CLI | `rag-ft-eval` |
-| Testing | pytest, 46 offline tests including a golden test |
+| Testing | pytest, 75 offline tests including a golden test |
 | Quality | Ruff, pre-commit, Gitleaks |
 | CI | GitHub Actions on Python 3.11 and 3.12, with result regeneration |
 
@@ -137,6 +139,34 @@ print(run.weights.kendall.w, round(run.weights.kendall.p_perm, 4))  # 0.792 0.00
 for row in run.sensitivity.leave_one_out:
     print(row.dropped_metric, round(row.delta, 4), row.winner)
 ```
+
+### Reference pipelines
+
+`rag_ft_eval.pipelines` reconstructs the two systems the study compared. Each moving part has the
+implementation used in the study and a dependency-free stand-in, so the whole path can be run and
+tested without credentials, a model download or a network call.
+
+| Stage | As in the study | Offline stand-in |
+|---|---|---|
+| Embedding | `SentenceTransformerEmbedder`, all-MiniLM-L6-v2, 384 dimensions | `HashingEmbedder`, deterministic hashing trick |
+| Vector store | `PineconeVectorStore`, managed serverless index, cosine | `InMemoryVectorStore`, exact NumPy cosine search |
+| Generation | `OpenAIGenerator`, GPT-3.5-Turbo, temperature 0.7, 250 tokens | `ExtractiveGenerator`, quotes the retrieved posts |
+| Fine-tuning | `FineTuningJob`, upload, start and poll at the provider | dataset building runs offline; the job does not |
+
+`RagAssistant` ties the first three together with the settings the study used: top five, a
+language filter on the detected query language, and posts kept below a cosine distance of 1.0. It
+returns the retrieved posts with every answer. `FineTunedAssistant` returns an empty source list
+by construction, which is the transparency difference made concrete.
+
+The full path runs offline on a small synthetic sample corpus:
+
+```bash
+uv run python -m rag_ft_eval.pipelines.demo
+```
+
+`pipelines/finetuning/dataset.py` documents something worth reading before trusting a model
+trained this way: the training targets are built by rule from the posts, not written by hand, so
+the assistant turn restates its own input.
 
 ---
 
@@ -206,7 +236,7 @@ Python 3.11 and 3.12.
 uv sync --extra plots
 uv run rag-ft-eval run data/case_study/config.yaml                     # exact arithmetic -> results/
 uv run rag-ft-eval run data/case_study/config.yaml --rounding thesis --output results/thesis_rounding
-uv run pytest                                                           # 46 offline tests, no API keys
+uv run pytest                                                           # 75 offline tests, no API keys
 ```
 
 Without `uv`:
@@ -247,9 +277,15 @@ src/rag_ft_eval/
   report.py        deterministic Markdown report
   plots.py         result figures
   cli.py           rag-ft-eval run | weights | sensitivity | validate
+  pipelines/       reference implementations of the two compared systems
+    common.py      corpus loading, language detection, shared result types
+    rag/           embedding, vector stores, generation, the assistant that ties them together
+    finetuning/    training-set construction, the provider job, the fine-tuned assistant
+    demo.py        runs both pipelines offline on the sample corpus
 data/case_study/   the raw research inputs: rankings, questions, measurements, literature criteria
+data/sample_corpus/ 24 hand-written synthetic posts, so the pipelines can run without credentials
 results/           committed output, exact arithmetic; results/thesis_rounding/ for the thesis convention
-tests/             46 offline tests, including the golden test that pins results/ to the code
+tests/             75 offline tests, including the golden test that pins results/ to the code
 docs/
   methodology.md   every formula the package computes, with references
   system-design.md configuration of the two prototypes and what was measured how

@@ -4,9 +4,12 @@ The prototypes were built to make the comparison fair rather than to be producti
 share the corpus, the interface, the generation model and the decoding parameters. The only
 component that differs is how domain knowledge reaches the model.
 
-They are not part of this repository. This document records their configuration so that the
-measurements in [`../data/case_study/measurements.csv`](../data/case_study/measurements.csv) can
-be read with the right context.
+The prototypes themselves were Streamlit applications over a corpus that is not released, so
+they are not part of this repository. Their retrieval, generation and fine-tuning behaviour is
+reconstructed as library code in `src/rag_ft_eval/pipelines/`, and this document records the
+configuration behind it, so that the measurements in
+[`../data/case_study/measurements.csv`](../data/case_study/measurements.csv) can be read with the
+right context.
 
 ![Architecture of the two prototypes](figures/prototype-architecture.svg)
 
