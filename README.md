@@ -83,7 +83,7 @@ place, and the response time and the number of retrieved posts were read off per
 lists the posts behind its answer; the fine-tuning card has nothing to list, which is the
 transparency criterion in one picture.
 
-> **NOTE: All values shown are illustrative. Original company data were replaced prior to export for data-protection > reasons. The frontend source code is not part of this release. A sanitized version is available upon request.
+> **NOTE**: All values shown are illustrative. Original company data were replaced prior to export for data-protection reasons. The frontend source code is not part of this release. A sanitized version is available upon request.
 
 ### Criterion weights
 
