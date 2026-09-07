@@ -161,10 +161,12 @@ def plot_profile(run: EvaluationRun, path: Path) -> Path:
 
     ax.set_xticks(angles, metric_labels, fontsize=10)
     ax.tick_params(axis="x", pad=10)
-    ax.set_ylim(0, 1)
+    # the radial axis starts just below zero so that a score of exactly 0 lands on a visible
+    # ring rather than collapsing into the centre point, where it cannot be read
+    ax.set_ylim(-0.07, 1)
     ax.set_rlabel_position(0)
-    ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
-    ax.set_yticklabels(["0.2", "0.4", "0.6", "0.8", "1.0"], fontsize=8.5, color="#868e96")
+    ax.set_yticks([0.0, 0.2, 0.4, 0.6, 0.8, 1.0])
+    ax.set_yticklabels(["0", "0.2", "0.4", "0.6", "0.8", "1.0"], fontsize=8.5, color="#868e96")
     ax.grid(color=GRID_COLOUR, linewidth=0.8)
     ax.spines["polar"].set_edgecolor(GRID_COLOUR)
     fig.suptitle(
