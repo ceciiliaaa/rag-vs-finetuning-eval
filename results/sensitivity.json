@@ -1,0 +1,112 @@
+{
+  "tool": "rag-ft-eval",
+  "version": "0.1.0",
+  "config": "config.yaml",
+  "rounding": "exact",
+  "systems": [
+    "rag",
+    "finetuned"
+  ],
+  "metrics": [
+    "correctness",
+    "transparency",
+    "recency",
+    "latency",
+    "cost_efficiency"
+  ],
+  "baseline_winner": "rag",
+  "baseline_runner_up": "finetuned",
+  "leave_one_out": [
+    {
+      "dropped_metric": "correctness",
+      "totals": [
+        0.8369755245,
+        0.2772435897
+      ],
+      "delta": 0.5597319347,
+      "winner": "rag"
+    },
+    {
+      "dropped_metric": "transparency",
+      "totals": [
+        0.7862233446,
+        0.5793209877
+      ],
+      "delta": 0.2069023569,
+      "winner": "rag"
+    },
+    {
+      "dropped_metric": "recency",
+      "totals": [
+        0.8701010101,
+        0.4588888889
+      ],
+      "delta": 0.4112121212,
+      "winner": "rag"
+    },
+    {
+      "dropped_metric": "latency",
+      "totals": [
+        0.8584577114,
+        0.3475124378
+      ],
+      "delta": 0.5109452736,
+      "winner": "rag"
+    },
+    {
+      "dropped_metric": "cost_efficiency",
+      "totals": [
+        0.8675033921,
+        0.4271144279
+      ],
+      "delta": 0.4403889643,
+      "winner": "rag"
+    }
+  ],
+  "perturbation": {
+    "n_samples": 10000,
+    "concentration": 50.0,
+    "seed": 0,
+    "win_fraction": {
+      "rag": 1.0,
+      "finetuned": 0.0
+    },
+    "delta_mean": 0.4288546311,
+    "delta_p05": 0.3321438404,
+    "delta_p95": 0.5249567637,
+    "delta_min": 0.2022277063,
+    "delta_max": 0.7057835689
+  },
+  "rank_reversal": [
+    {
+      "metric": "correctness",
+      "current_weight": 0.3066666667,
+      "threshold_weight": null,
+      "direction": null
+    },
+    {
+      "metric": "transparency",
+      "current_weight": 0.28,
+      "threshold_weight": null,
+      "direction": null
+    },
+    {
+      "metric": "recency",
+      "current_weight": 0.2,
+      "threshold_weight": null,
+      "direction": null
+    },
+    {
+      "metric": "latency",
+      "current_weight": 0.1066666667,
+      "threshold_weight": 0.6648422787,
+      "direction": "increase"
+    },
+    {
+      "metric": "cost_efficiency",
+      "current_weight": 0.1066666667,
+      "threshold_weight": null,
+      "direction": null
+    }
+  ]
+}

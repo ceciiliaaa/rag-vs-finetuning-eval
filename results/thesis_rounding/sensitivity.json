@@ -1,0 +1,112 @@
+{
+  "tool": "rag-ft-eval",
+  "version": "0.1.0",
+  "config": "config.yaml",
+  "rounding": "thesis",
+  "systems": [
+    "rag",
+    "finetuned"
+  ],
+  "metrics": [
+    "correctness",
+    "transparency",
+    "recency",
+    "latency",
+    "cost_efficiency"
+  ],
+  "baseline_winner": "rag",
+  "baseline_runner_up": "finetuned",
+  "leave_one_out": [
+    {
+      "dropped_metric": "correctness",
+      "totals": [
+        0.8355,
+        0.2767
+      ],
+      "delta": 0.5588,
+      "winner": "rag"
+    },
+    {
+      "dropped_metric": "transparency",
+      "totals": [
+        0.7849,
+        0.5787
+      ],
+      "delta": 0.2062,
+      "winner": "rag"
+    },
+    {
+      "dropped_metric": "recency",
+      "totals": [
+        0.8689,
+        0.4583
+      ],
+      "delta": 0.4106,
+      "winner": "rag"
+    },
+    {
+      "dropped_metric": "latency",
+      "totals": [
+        0.8589,
+        0.347
+      ],
+      "delta": 0.5119,
+      "winner": "rag"
+    },
+    {
+      "dropped_metric": "cost_efficiency",
+      "totals": [
+        0.8661,
+        0.427
+      ],
+      "delta": 0.4391,
+      "winner": "rag"
+    }
+  ],
+  "perturbation": {
+    "n_samples": 10000,
+    "concentration": 50.0,
+    "seed": 0,
+    "win_fraction": {
+      "rag": 1.0,
+      "finetuned": 0.0
+    },
+    "delta_mean": 0.4284398912,
+    "delta_p05": 0.3314104281,
+    "delta_p95": 0.5248711937,
+    "delta_min": 0.1992287902,
+    "delta_max": 0.7056054874
+  },
+  "rank_reversal": [
+    {
+      "metric": "correctness",
+      "current_weight": 0.3066666667,
+      "threshold_weight": null,
+      "direction": null
+    },
+    {
+      "metric": "transparency",
+      "current_weight": 0.28,
+      "threshold_weight": null,
+      "direction": null
+    },
+    {
+      "metric": "recency",
+      "current_weight": 0.2,
+      "threshold_weight": null,
+      "direction": null
+    },
+    {
+      "metric": "latency",
+      "current_weight": 0.1066666667,
+      "threshold_weight": 0.6547182776,
+      "direction": "increase"
+    },
+    {
+      "metric": "cost_efficiency",
+      "current_weight": 0.1066666667,
+      "threshold_weight": null,
+      "direction": null
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "tool": "rag-ft-eval",
+  "version": "0.1.0",
+  "config": "config.yaml",
+  "rounding": "thesis",
+  "systems": [
+    "rag",
+    "finetuned"
+  ],
+  "metrics": [
+    "correctness",
+    "transparency",
+    "recency",
+    "latency",
+    "cost_efficiency"
+  ],
+  "mean": [
+    4.6,
+    4.2,
+    3.0,
+    1.6,
+    1.6
+  ],
+  "std": [
+    0.5477225575,
+    0.8366600265,
+    0.7071067812,
+    0.5477225575,
+    0.894427191
+  ],
+  "weight": [
+    0.3066666667,
+    0.28,
+    0.2,
+    0.1066666667,
+    0.1066666667
+  ],
+  "kendall": {
+    "w": 0.792,
+    "chi2": 15.84,
+    "df": 4,
+    "p_chi2": 0.0032415488,
+    "p_perm": 9.9995e-05,
+    "n_raters": 5,
+    "n_items": 5,
+    "n_perm": 20000
+  },
+  "experts": [
+    "expert_1",
+    "expert_2",
+    "expert_3",
+    "expert_4",
+    "expert_5"
+  ]
+}

@@ -1,0 +1,77 @@
+{
+  "tool": "rag-ft-eval",
+  "version": "0.1.0",
+  "config": "config.yaml",
+  "rounding": "thesis",
+  "systems": [
+    "rag",
+    "finetuned"
+  ],
+  "metrics": [
+    "correctness",
+    "transparency",
+    "recency",
+    "latency",
+    "cost_efficiency"
+  ],
+  "weights": [
+    0.3067,
+    0.28,
+    0.2,
+    0.1067,
+    0.1067
+  ],
+  "scores": [
+    [
+      0.867,
+      1.0,
+      0.75,
+      0.73,
+      0.67
+    ],
+    [
+      0.733,
+      0.0,
+      0.25,
+      1.0,
+      0.33
+    ]
+  ],
+  "contributions": [
+    [
+      0.2659,
+      0.28,
+      0.15,
+      0.0779,
+      0.0715
+    ],
+    [
+      0.2248,
+      0.0,
+      0.05,
+      0.1067,
+      0.0352
+    ]
+  ],
+  "totals": [
+    0.8453,
+    0.4167
+  ],
+  "winner": "rag",
+  "runner_up": "finetuned",
+  "gap": 0.4286,
+  "gap_by_metric": [
+    0.0411,
+    0.28,
+    0.1,
+    -0.0288,
+    0.0363
+  ],
+  "gap_share": [
+    0.0958936071,
+    0.6532897807,
+    0.2333177788,
+    -0.0671955203,
+    0.0846943537
+  ]
+}

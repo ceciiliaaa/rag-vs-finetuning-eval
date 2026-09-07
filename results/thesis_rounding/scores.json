@@ -1,0 +1,180 @@
+{
+  "tool": "rag-ft-eval",
+  "version": "0.1.0",
+  "config": "config.yaml",
+  "rounding": "thesis",
+  "systems": [
+    "rag",
+    "finetuned"
+  ],
+  "metrics": [
+    "correctness",
+    "transparency",
+    "recency",
+    "latency",
+    "cost_efficiency"
+  ],
+  "values": [
+    [
+      0.867,
+      1.0,
+      0.75,
+      0.73,
+      0.67
+    ],
+    [
+      0.733,
+      0.0,
+      0.25,
+      1.0,
+      0.33
+    ]
+  ],
+  "details": {
+    "correctness": {
+      "kind": "measured_binary",
+      "column": "correct",
+      "positive": {
+        "rag": 13,
+        "finetuned": 11
+      },
+      "n": {
+        "rag": 15,
+        "finetuned": 15
+      }
+    },
+    "transparency": {
+      "kind": "measured_binary",
+      "column": "transparent",
+      "positive": {
+        "rag": 15,
+        "finetuned": 0
+      },
+      "n": {
+        "rag": 15,
+        "finetuned": 15
+      }
+    },
+    "recency": {
+      "kind": "literature",
+      "criteria": [
+        {
+          "id": "R1",
+          "statement": "New knowledge becomes effective without retraining the model",
+          "scores": {
+            "rag": 1,
+            "finetuned": 0
+          },
+          "sources": [
+            "lewis2020",
+            "gao2024",
+            "petroni2019",
+            "shi2024",
+            "wu2025"
+          ]
+        },
+        {
+          "id": "R2",
+          "statement": "The system stays available while knowledge is updated",
+          "scores": {
+            "rag": 1,
+            "finetuned": 0
+          },
+          "sources": [
+            "gao2024",
+            "shi2024"
+          ]
+        },
+        {
+          "id": "R3",
+          "statement": "Low cost per knowledge update",
+          "scores": {
+            "rag": 1,
+            "finetuned": 0
+          },
+          "sources": [
+            "gao2024",
+            "yang2025",
+            "mombaerts2024"
+          ]
+        },
+        {
+          "id": "R4",
+          "statement": "Model behaviour is stable after an update",
+          "scores": {
+            "rag": 0,
+            "finetuned": 1
+          },
+          "sources": [
+            "gao2024",
+            "wu2025"
+          ]
+        }
+      ]
+    },
+    "latency": {
+      "kind": "measured_latency",
+      "column": "latency_s",
+      "stats": {
+        "rag": {
+          "n": 15,
+          "mean": 3.96,
+          "std": 1.2721185929,
+          "min": 2.2,
+          "max": 7.2
+        },
+        "finetuned": {
+          "n": 15,
+          "mean": 2.94,
+          "std": 0.9470254183,
+          "min": 1.2,
+          "max": 4.6
+        }
+      }
+    },
+    "cost_efficiency": {
+      "kind": "literature",
+      "criteria": [
+        {
+          "id": "C1",
+          "statement": "Low initial cost (setup and domain integration)",
+          "scores": {
+            "rag": 1,
+            "finetuned": 0
+          },
+          "sources": [
+            "huang2024",
+            "han2024",
+            "wu2025"
+          ]
+        },
+        {
+          "id": "C2",
+          "statement": "Low inference cost per request",
+          "scores": {
+            "rag": 0,
+            "finetuned": 1
+          },
+          "sources": [
+            "huang2024",
+            "wu2025",
+            "shi2024"
+          ]
+        },
+        {
+          "id": "C3",
+          "statement": "Predictable cost when data volume or usage grows",
+          "scores": {
+            "rag": 1,
+            "finetuned": 0
+          },
+          "sources": [
+            "huang2024",
+            "gao2024",
+            "shi2024"
+          ]
+        }
+      ]
+    }
+  }
+}
