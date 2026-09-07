@@ -6,10 +6,6 @@ strategies, applied to retrieval-augmented generation and supervised fine-tuning
 > Research Project @ **Mercedes-AMG**, Market Intelligence<br>
 > by **Cecilia Nothstein**, July 2025<br>
 
-[![ci](https://github.com/ceciiliaaa/rag-vs-finetuning-eval/actions/workflows/ci.yml/badge.svg)](https://github.com/ceciiliaaa/rag-vs-finetuning-eval/actions/workflows/ci.yml)
-[![python](https://img.shields.io/badge/python-3.11%20%7C%203.12-blue)](pyproject.toml)
-[![license](https://img.shields.io/badge/license-MIT-green)](LICENSE)
-
 A department that wants a question-answering assistant over its customer feedback has to pick a
 domain-adaptation strategy, and accuracy alone does not decide it. Whether an analyst can see where
 an answer came from, how quickly last week's feedback reaches the system, how long a query takes
@@ -30,6 +26,53 @@ no per-answer sources. The pipeline also quantifies how far priorities would hav
 the ranking flips, namely response time rising from a weight of 0.11 to 0.66. The result holds for
 this application context, these operationalised criteria and this stakeholder profile, and the
 repository is built so that any of them can be changed and the analysis rerun.
+
+---
+
+## Study design
+
+![Conceptual framework: two systems, five criteria, two scoring routes, stakeholder weighting, weighted aggregation](docs/figures/evaluation-framework.svg)
+
+| Criterion | Definition | Scoring |
+|---|---|---|
+| Answer correctness | Share of answers that are factually and contextually right | 15 test questions, binary human judgement |
+| Transparency | Whether the origin of an answer can be traced by the user | 15 test questions, binary judgement: were supporting sources shown |
+| Recency | How quickly new or changed information reaches the answers | 4 binary sub-criteria from published evidence |
+| Response time | Seconds from question to complete answer | Measured per question; fastest mean divided by system mean |
+| Cost efficiency | Initial, inference and scaling cost over the lifecycle | 3 binary sub-criteria from published evidence |
+
+Recency and cost efficiency depend on deployment scale and update frequency, which a 15-question
+prototype study cannot represent. They are scored against the literature on binary sub-criteria
+that each carry their sources in
+[`literature_criteria.yaml`](data/case_study/literature_criteria.yaml), and marked as
+literature-scored wherever they appear.
+
+![Prototype architecture: a Streamlit interface passes the question to either the RAG pipeline or the fine-tuning pipeline, both generating with GPT-3.5-Turbo](docs/figures/prototype-architecture.svg)
+
+Both prototypes shared the corpus, the interface, the generation model (GPT-3.5-Turbo, temperature
+0.7) and the question set, so measured differences are attributable to the knowledge-integration
+step. The RAG variant embedded the posts with `all-MiniLM-L6-v2`, retrieved the five most similar
+ones from a Pinecone index and displayed them next to the answer. The fine-tuning variant trained a
+GPT-3.5-Turbo instance on question-answer pairs from the same posts and answered without
+retrieval.
+
+Five practitioners with at least three years in portfolio and market strategy ranked the criteria
+by forced ranking, which avoids the "everything is important" pattern of rating scales. Questions,
+answers, response times and judgements are committed verbatim in
+[`measurements.csv`](data/case_study/measurements.csv), so any individual judgement can be disputed
+and the analysis rerun.
+
+| Criterion | Mean rank | SD | Weight |
+|---|---|---|---|
+| Answer correctness | 4.60 | 0.55 | 0.3067 |
+| Transparency | 4.20 | 0.84 | 0.2800 |
+| Recency | 3.00 | 0.71 | 0.2000 |
+| Response time | 1.60 | 0.55 | 0.1067 |
+| Cost efficiency | 1.60 | 0.89 | 0.1067 |
+
+Rater agreement: **Kendall's W = 0.792**, chi-square p = 0.0032, and p = 0.0001 under a
+permutation test over 20,000 resamples, which is reported because the chi-square approximation is
+coarse at five raters.
 
 ---
 
@@ -86,53 +129,6 @@ print(run.weights.kendall.w, round(run.weights.kendall.p_perm, 4))  # 0.792 0.00
 for row in run.sensitivity.leave_one_out:
     print(row.dropped_metric, round(row.delta, 4), row.winner)
 ```
-
----
-
-## Study design
-
-![Conceptual framework: two systems, five criteria, two scoring routes, stakeholder weighting, weighted aggregation](docs/figures/evaluation-framework.svg)
-
-| Criterion | Definition | Scoring |
-|---|---|---|
-| Answer correctness | Share of answers that are factually and contextually right | 15 test questions, binary human judgement |
-| Transparency | Whether the origin of an answer can be traced by the user | 15 test questions, binary judgement: were supporting sources shown |
-| Recency | How quickly new or changed information reaches the answers | 4 binary sub-criteria from published evidence |
-| Response time | Seconds from question to complete answer | Measured per question; fastest mean divided by system mean |
-| Cost efficiency | Initial, inference and scaling cost over the lifecycle | 3 binary sub-criteria from published evidence |
-
-Recency and cost efficiency depend on deployment scale and update frequency, which a 15-question
-prototype study cannot represent. They are scored against the literature on binary sub-criteria
-that each carry their sources in
-[`literature_criteria.yaml`](data/case_study/literature_criteria.yaml), and marked as
-literature-scored wherever they appear.
-
-![Prototype architecture: a Streamlit interface passes the question to either the RAG pipeline or the fine-tuning pipeline, both generating with GPT-3.5-Turbo](docs/figures/prototype-architecture.svg)
-
-Both prototypes shared the corpus, the interface, the generation model (GPT-3.5-Turbo, temperature
-0.7) and the question set, so measured differences are attributable to the knowledge-integration
-step. The RAG variant embedded the posts with `all-MiniLM-L6-v2`, retrieved the five most similar
-ones from a Pinecone index and displayed them next to the answer. The fine-tuning variant trained a
-GPT-3.5-Turbo instance on question-answer pairs from the same posts and answered without
-retrieval.
-
-Five practitioners with at least three years in portfolio and market strategy ranked the criteria
-by forced ranking, which avoids the "everything is important" pattern of rating scales. Questions,
-answers, response times and judgements are committed verbatim in
-[`measurements.csv`](data/case_study/measurements.csv), so any individual judgement can be disputed
-and the analysis rerun.
-
-| Criterion | Mean rank | SD | Weight |
-|---|---|---|---|
-| Answer correctness | 4.60 | 0.55 | 0.3067 |
-| Transparency | 4.20 | 0.84 | 0.2800 |
-| Recency | 3.00 | 0.71 | 0.2000 |
-| Response time | 1.60 | 0.55 | 0.1067 |
-| Cost efficiency | 1.60 | 0.89 | 0.1067 |
-
-Rater agreement: **Kendall's W = 0.792**, chi-square p = 0.0032, and p = 0.0001 under a
-permutation test over 20,000 resamples, which is reported because the chi-square approximation is
-coarse at five raters.
 
 ---
 
