@@ -1,11 +1,23 @@
 # Changelog
 
-## 0.1.1 (unreleased)
+## 0.2.0 (2026-09-07)
 
-- README rewritten around the thesis context: research question, method figures, results,
-  limitations, repository layout.
-- Thesis figures added under `docs/figures/` (German labels; English versions to follow).
-- `requirements.txt` / `requirements-dev.txt` exported from `uv.lock` for pip users.
+Presentation and information architecture, no change to any measurement, judgement or result.
+
+- README repositioned as a research artifact: research question, study design, results,
+  robustness, scope conditions. Tutorial-level explanations of RAG and fine-tuning removed.
+- Claims tightened. The result is stated as conditional on the application context, the
+  operationalised criteria, the elicited stakeholder profile and the sample. The transparency
+  score is described as a property of the evaluated prototype rather than of fine-tuned systems in
+  general, and the sensitivity analysis is described as testing robustness to the weight model
+  only.
+- Contributions of the submitted thesis and of this repository separated in a dedicated section
+  and in `docs/methodology.md`.
+- `docs/system-design.md` added: configuration of both prototypes and the measurement instruments.
+- Diagrams used in the documentation redrawn in English as SVG under `docs/figures/`. The original
+  German thesis figures moved to `docs/thesis_figures/` with an index for provenance.
+- `docs/limitations.md` restructured by sample, evidence quality and model assumptions.
+- Badge row removed; repository description and topics set.
 
 ## 0.1.0 (2026-09-07)
 

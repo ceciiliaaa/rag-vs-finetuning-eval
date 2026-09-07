@@ -1,129 +1,99 @@
-# rag-vs-finetuning-eval
+# RAG vs. Fine-Tuning Evaluation
 
-**A stakeholder-weighted utility analysis of RAG versus fine-tuning for domain-specific
-question answering, as a tested Python package with the thesis case study built in**
+**A reproducible stakeholder-weighted evaluation of retrieval-augmented generation and supervised
+fine-tuning for domain-specific question answering**
 
-> Project thesis (Projektarbeit 2) by **Cecilia Nothstein**<br>
+> Project thesis by **Cecilia Nothstein**<br>
 > DHBW Stuttgart, Business Information Systems<br>
-> Written in cooperation with **Mercedes-AMG** @ Portfolio Strategy & Market Intelligence
+> Conducted in cooperation with **Mercedes-AMG** @ Portfolio Strategy & Market Intelligence
 
-[![ci](https://github.com/ceciiliaaa/rag-vs-finetuning-eval/actions/workflows/ci.yml/badge.svg)](https://github.com/ceciiliaaa/rag-vs-finetuning-eval/actions/workflows/ci.yml)
-![python](https://img.shields.io/badge/python-3.11%2B-blue)
-![license](https://img.shields.io/badge/license-MIT-green)
+A department that wants a question-answering assistant over its customer feedback has to pick a
+domain-adaptation strategy, and accuracy alone does not decide it. Whether an analyst can see
+where an answer came from, how quickly last week's feedback reaches the system, how long a query
+takes and what the setup costs over its lifetime all matter, and they trade off against each
+other. The literature reviewed for this project emphasised technical performance; the
+organisational trade-off was less systematically operationalised.
 
-Generic language models answer domain-specific questions imprecisely; the two established
-ways to specialise them are retrieval-augmented generation (RAG) and fine-tuning. Published
-comparisons look at technical performance. A department that has to pick one of them also
-cares whether it can see where an answer came from, how quickly new customer feedback shows
-up in the answers, how long a query takes, and what the system costs over its lifetime. Those
-criteria pull in different directions, and different stakeholders weigh them differently.
+This repository is the evaluation instrument of a Design Science Research thesis that compared two
+widely used domain-adaptation strategies, retrieval-augmented generation and supervised
+fine-tuning, on that trade-off:
 
-![Fine-tuning bakes the domain data into the model's weights; RAG keeps the data outside and retrieves it at query time](docs/figures/rag-vs-finetuning-flow.jpg)
+> **RQ** Which of the two strategies for domain specialisation of large language models,
+> retrieval-augmented generation or supervised fine-tuning, achieves the higher economic value in
+> the context of analysing social-media customer data?
 
-*Same question, two ways to inject domain knowledge. Fine-tuning changes the model. RAG leaves
-the model untouched and retrieves the relevant customer posts into the prompt.*
+Economic value is treated as a multi-criteria construct, weighted by the people who would use the
+system and aggregated in a utility analysis. Two matched prototypes were built on the same corpus
+and evaluated on the same 15 questions.
 
-This repository is the evaluation instrument of a Design Science Research thesis that asked:
+**The result: RAG reached a utility of ≈ 0.85 against ≈ 0.42 for fine-tuning under the elicited
+stakeholder profile.** The more informative part is *why*. Two thirds of the gap come from a
+single criterion, transparency, where the difference is architectural rather than a matter of
+answer quality: the fine-tuning prototype had no retrieval layer and therefore could show no
+per-answer sources. And the framework can say exactly how far stakeholder priorities would have to
+move before the ranking flips, namely response time rising from a weight of 0.11 to 0.66. The
+verdict is conditional on this application context, these operationalised criteria, this
+stakeholder profile and this sample, and the repository is built so that a reader can change any
+of them and recompute.
 
-> **RQ** Which of the two methods for domain specialisation of large language models,
-> retrieval-augmented generation or fine-tuning, achieves the higher economic value in the
-> context of analysing social-media customer data?
+## Key contributions
 
-Economic value is treated as a multi-criteria construct: answer correctness, transparency,
-recency, response time and cost efficiency, weighted by the people who would use the system,
-and aggregated in a utility analysis (Nutzwertanalyse). Two prototypes were built on the same
-corpus and evaluated on the same 15 questions.
-
-The short answer: **RAG reaches a utility of 0.8461 against 0.4171 for fine-tuning**, and the
-ranking is not fragile. RAG stays ahead when any single criterion is dropped, wins in 100 % of
-10 000 perturbed weight vectors, and would only lose if response time carried two thirds of
-the total weight. Two thirds of the gap comes from one criterion, transparency, which the
-fine-tuned model cannot provide by construction: it has no sources to show.
-
-Every number in this README is generated by the code in this repository from the raw
-inputs under `data/case_study/`. A golden test and the CI workflow fail if the committed
-`results/` drift from a fresh run.
-
----
-
-## What this repository is
-
-The thesis produced two things: a chatbot prototype in two variants, and an evaluation
-method. This repository is a standalone, tested reimplementation of the second, released as a
-small Python package with a command-line interface:
-
-* **Weights from expert rankings**, with agreement testing by Kendall's W. The chi-square
-  approximation is coarse for five raters, so a seeded Monte-Carlo permutation test is
-  reported next to it.
-* **Criterion normalisation** for binary human judgements, response times (ratio-to-best)
-  and literature-scored sub-criteria, with an explicit rounding mode that reproduces
-  spreadsheet arithmetic exactly.
-* **Weighted additive utility** with a per-criterion decomposition of the gap between the
-  top two systems.
-* **Sensitivity analysis**: leave-one-criterion-out, Dirichlet perturbation of the weight
-  vector, and closed-form rank-reversal thresholds per criterion.
-* **Deterministic outputs**: JSON, a Markdown report that renders the cited evidence, and
-  figures.
-
-The prototypes themselves are not part of this release. They needed hosted APIs and a
-managed vector index, and their value for a reader lies in what was measured on them, which
-is all here. Reference implementations are planned (see roadmap).
+- **Matched prototypes.** RAG and supervised fine-tuning evaluated on the same corpus, interface,
+  generation model and question set, so measured differences are attributable to the
+  knowledge-integration step.
+- **A stakeholder-weighted MCDA framework** over answer correctness, transparency (per-answer
+  source traceability), recency, response time and cost efficiency, with two scoring routes:
+  measured on the prototypes, or scored from published evidence with cited sources.
+- **Weights elicited from five practitioners** in Portfolio Strategy & Market Intelligence by
+  forced ranking, with rater agreement quantified rather than assumed.
+- **A reproducible Python implementation**: deterministic reports, a golden test and CI that
+  regenerates every committed result and fails on drift, so no number in this README is typed by
+  hand.
+- **Robustness analysis** by leave-one-criterion-out, Dirichlet weight perturbation and
+  closed-form rank-reversal thresholds, which turns "RAG wins" into "RAG wins unless priorities
+  shift this far".
+- **A context-specific answer**, stated with its scope conditions rather than as a general claim
+  about the two strategies.
 
 ---
 
-## The two prototypes
+## Study design
 
-![Prototype architecture: a Streamlit front end passes the user's question to either the RAG pipeline or the fine-tuning pipeline; both generate the answer with GPT-3.5-Turbo](docs/figures/prototype-architecture.png)
+![Conceptual framework: two systems, five criteria, two scoring routes, stakeholder weighting, weighted aggregation](docs/figures/evaluation-framework.svg)
 
-*Both variants share everything except the knowledge-integration step. Same corpus, same
-generation model (GPT-3.5-Turbo, temperature 0.7), same interface. Only the pipeline in the
-middle differs, so the measured differences can be attributed to it.*
-
-**RAG** embeds the customer posts with `sentence-transformers/all-MiniLM-L6-v2`, stores the
-vectors in a managed Pinecone index, retrieves the five most similar posts by cosine
-similarity with a language filter, and concatenates them into the prompt. The five retrieved
-posts are shown next to the answer, which is what makes the answer traceable.
-
-![RAG pipeline of the prototype: prepared CSV data, chunking and embedding with MiniLM-L6-v2, Pinecone vector store with top-k retrieval, concatenation into the prompt, answer generation with GPT-3.5-Turbo](docs/figures/rag-pipeline.png)
-
-**Fine-tuning** turns the same posts into question-answer pairs in chat format and trains a
-GPT-3.5-Turbo variant through OpenAI's fine-tuning API. At query time the question goes
-straight to the fine-tuned model; nothing is retrieved and nothing can be shown as a source.
-
-![Supervised fine-tuning: a domain-specific training set drives a loop of prompt, answer generation, loss computation and parameter update on the base LLM](docs/figures/supervised-fine-tuning.png)
-
----
-
-## Evaluation framework
-
-![Conceptual framework: the two systems are compared on five criteria; three are measured on 15 test questions, two are assessed from current research literature; stakeholder interviews weight the criteria, the values are normalised and aggregated in a decision matrix](docs/figures/evaluation-framework.png)
-
-*Three criteria are measured on the prototypes, two are judged from published evidence, and
-stakeholder interviews decide how much each criterion counts.*
-
-| Criterion | Definition | How it is scored |
+| Criterion | Definition | Scoring |
 |---|---|---|
-| Answer correctness | Share of answers that are factually and contextually right | 15 test questions, binary human judgement per answer |
-| Transparency | Whether the origin of an answer can be traced | 15 test questions, binary judgement: were supporting posts shown |
-| Recency | How quickly new or changed information enters the system | Four binary sub-criteria from the literature (update without retraining, availability during updates, cost per update, stability after updates) |
-| Response time | Seconds from question to complete answer | Measured per test question; fastest mean divided by system mean |
-| Cost efficiency | Initial, inference and scaling cost over the lifecycle | Three binary sub-criteria from the literature |
+| Answer correctness | Share of answers that are factually and contextually right | 15 test questions, binary human judgement |
+| Transparency | Whether the origin of an answer can be traced by the user | 15 test questions, binary judgement: were supporting sources shown |
+| Recency | How quickly new or changed information reaches the answers | 4 binary sub-criteria from published evidence |
+| Response time | Seconds from question to complete answer | Measured per question; fastest mean divided by system mean |
+| Cost efficiency | Initial, inference and scaling cost over the lifecycle | 3 binary sub-criteria from published evidence |
 
-The 15 test questions were developed with the stakeholders and cover three areas of a
-portfolio strategist's work: market and competition, customer sentiment, product and
-technology. Both prototypes answered all of them; the answers, response times and judgements are
-committed verbatim in
-[`data/case_study/measurements.csv`](data/case_study/measurements.csv).
+Recency and cost efficiency were not measured on the prototypes. Both depend heavily on
+deployment scale and update frequency, which a 15-question prototype study cannot represent, so
+they are scored against the literature on binary sub-criteria that each carry their sources in
+[`literature_criteria.yaml`](data/case_study/literature_criteria.yaml). That is a weaker form of
+evidence than the measured criteria, and it is marked as such everywhere it appears.
 
-![Question catalogue: 15 German questions in three areas with both systems' answers, response times, correctness and transparency judgements](docs/figures/test-question-catalogue.jpg)
+![Prototype architecture: a Streamlit interface passes the question to either the RAG pipeline or the fine-tuning pipeline, both generating with GPT-3.5-Turbo](docs/figures/prototype-architecture.svg)
 
-### Weights from five expert interviews
+Both variants share the corpus, the interface, the generation model (GPT-3.5-Turbo, temperature
+0.7) and the question set. The RAG variant embeds the posts with `all-MiniLM-L6-v2`, retrieves
+the five most similar ones from a Pinecone index and shows them next to the answer. The
+fine-tuning variant trains a GPT-3.5-Turbo instance on question-answer pairs derived from the
+same posts and answers without retrieval. Full configuration in
+[`docs/system-design.md`](docs/system-design.md).
 
-Five practitioners from portfolio and market strategy, each with at least three years in the
-role, ranked the five criteria in semi-structured interviews (forced ranking 1 to 5, 5 = most
-important). The forced ranking avoids the "everything is important" pattern of rating scales.
+The 15 questions cover three areas of a portfolio strategist's work: market and competition,
+customer sentiment, product and technology. Questions, answers, response times and judgements are
+committed verbatim in [`measurements.csv`](data/case_study/measurements.csv), so any individual
+judgement can be disputed and the result recomputed.
 
-![Interview guide: two open questions on the usefulness of a domain-specific assistant, the five criteria with definitions and a ranking column, and a closing question on missing criteria](docs/figures/interview-guide.png)
+### Weights
+
+Five practitioners with at least three years in portfolio and market strategy ranked the five
+criteria in semi-structured interviews. A forced ranking was used rather than a rating scale,
+which prevents the "everything is important" pattern.
 
 | Criterion | Mean rank | SD | Weight |
 |---|---|---|---|
@@ -133,9 +103,10 @@ important). The forced ranking avoids the "everything is important" pattern of r
 | Response time | 1.60 | 0.55 | 0.1067 |
 | Cost efficiency | 1.60 | 0.89 | 0.1067 |
 
-Agreement between the five rankings: **Kendall's W = 0.792** (chi-square p = 0.0032;
-permutation test with 20 000 samples p = 0.0001). The experts agreed most on answer
-correctness and response time (SD 0.55) and least on cost efficiency (SD 0.89).
+Agreement across the five rankings: **Kendall's W = 0.792**. The chi-square approximation gives
+p = 0.0032, but it is coarse at five raters, so a Monte-Carlo permutation test over 20,000
+resamples is reported alongside it: p = 0.0001. Agreement was highest on answer correctness and
+response time (SD 0.55) and lowest on cost efficiency (SD 0.89).
 
 ---
 
@@ -150,18 +121,11 @@ correctness and response time (SD 0.55) and least on cost efficiency (SD 0.89).
 | Cost efficiency | 0.1067 | 0.667 (2/3) | 0.333 (1/3) |
 | **Weighted utility** | | **0.8461** | **0.4171** |
 
-<p align="center">
-  <img src="results/figures/utility_contributions.png" width="46%" alt="Weighted utility by criterion for RAG and fine-tuning">
-  <img src="results/figures/profile_radar.png" width="46%" alt="Stakeholder target profile versus the measured score profiles">
-</p>
+![Weighted utility by criterion for both systems](results/figures/utility_contributions.png)
 
-*Left: utility stacked by criterion. Right: the stakeholder target profile (mean rank
-divided by the maximum rank) against the measured score profiles. RAG covers the target
-almost everywhere; fine-tuning covers it only on response time.*
-
-Fine-tuning is faster (2.94 s against 3.96 s per answer, because there is no retrieval step)
-and cheaper per request. It loses on everything the stakeholders ranked higher. The gap of
-0.4290 decomposes as follows:
+Fine-tuning answers faster, 2.94 s against 3.96 s, because there is no retrieval step, and it is
+cheaper per request. It loses on the criteria the stakeholders ranked higher. The gap of 0.4290
+decomposes as:
 
 | Criterion | Contribution to gap | Share |
 |---|---|---|
@@ -171,160 +135,133 @@ and cheaper per request. It loses on everything the stakeholders ranked higher. 
 | Cost efficiency | 0.0356 | 8.3 % |
 | Response time | -0.0275 | -6.4 % |
 
-Transparency carries the result, and it is the one criterion where the difference is
-structural rather than measured: a fine-tuned model has no retrieved documents to display.
-That makes the sensitivity analysis the more important half of the evaluation.
+The single largest term is not a quality difference. The fine-tuning prototype scored 0 on
+transparency because it had no retrieval layer to expose, so the criterion the stakeholders
+ranked second was decided by an architectural choice. That makes the robustness analysis the more
+important half of the evaluation, not an appendix to it.
 
-### How robust is the ranking
+> **Reproducibility note.** The repository implementation yields 0.8461 and 0.4171. The thesis
+> reported 0.8453 and 0.4167 because intermediate values were rounded before aggregation; that
+> convention is reproducible with `--rounding thesis`. Ranking and interpretation are unchanged.
 
-<p align="center">
-  <img src="results/figures/sensitivity.png" width="94%" alt="Leave-one-out utilities and the weight at which fine-tuning would overtake RAG">
-</p>
+## Robustness
 
-* **Leave one criterion out.** RAG wins in all five cases. The smallest remaining gap is
-  0.2069, when transparency is removed and the other weights are rescaled.
-* **Perturb the weights.** 10 000 weight vectors drawn from a Dirichlet distribution centred
-  on the expert weights (concentration 50): RAG wins 100 %; its advantage is never below
-  0.2022 (5th percentile 0.3321, mean 0.4289).
-* **Rank reversal.** Response time is the only criterion whose weight can flip the ranking,
-  and it would have to rise from 0.1067 to **0.6648**. No change of any other single weight
-  reverses the result.
+![Leave-one-out utilities and the weight at which fine-tuning would overtake RAG](results/figures/sensitivity.png)
 
-The practical reading: fine-tuning is the better choice only for a stakeholder profile that
-cares about speed far more than about traceability and currency, which is not the profile of a
-market-intelligence department.
+- **Leave one criterion out.** RAG stays ahead in all five cases. The smallest remaining gap is
+  0.2069, when transparency is removed and the other weights are rescaled proportionally.
+- **Perturb the weights.** Over 10,000 weight vectors drawn from a Dirichlet distribution centred
+  on the elicited weights, RAG wins 100 % of the time; its advantage never falls below 0.2022
+  (5th percentile 0.3321, mean 0.4289).
+- **Rank reversal.** Response time is the only criterion whose weight can flip the ranking, and it
+  would have to rise from 0.1067 to **0.6648**. No change to any other single weight reverses the
+  result.
 
-### The decision matrix as printed in the thesis
+Within this utility model and case study, fine-tuning therefore overtakes RAG only for a
+stakeholder profile that weights response time at roughly two thirds of the total, far outside the
+range the interviews produced. The analysis tests robustness to the specified weight model. It
+does not establish robustness to measurement error, to a different set or operationalisation of
+criteria, to a different sample of experts, or to different model providers.
 
-![Decision matrix from the thesis: weights, normalised scores and weighted contributions per criterion, total utility 0.8453 for RAG and 0.4167 for fine-tuning](docs/figures/decision-matrix.png)
+## Repository extension beyond the thesis
 
-The thesis rounded intermediate values (latency ratio 0.73, cost scores 0.67 and 0.33,
-contributions to four decimals) and arrived at 0.8453 and 0.4167. The package reproduces that
-arithmetic with `--rounding thesis`, see
-[`results/thesis_rounding/report.md`](results/thesis_rounding/report.md); the default is
-exact arithmetic, which gives 0.8461 and 0.4171. Neither difference changes anything
-downstream.
+The submitted thesis contributed the case study, the criteria, the elicited weights, the
+measurements and the additive utility analysis, computed in a spreadsheet. This repository is a
+later reimplementation that adds the engineering and the parts of the robustness analysis marked
+below, so the two should not be read as one artifact.
 
----
+| | Submitted thesis | This repository |
+|---|---|---|
+| Criteria, prototypes, measurements | yes | unchanged, committed as raw inputs |
+| Expert weights, Kendall's W | yes, chi-square approximation | plus a seeded Monte-Carlo permutation test |
+| Additive utility, gap decomposition | yes | unchanged, recomputed from the inputs |
+| Arithmetic | rounded intermediate values | exact by default, thesis rounding reproducible on request |
+| Leave-one-criterion-out | for transparency only | for all five criteria |
+| Weight perturbation | no | Dirichlet sampling around the elicited weights |
+| Rank-reversal thresholds | no | closed-form, per criterion |
+| Implementation | spreadsheet | tested Python package, CLI, deterministic reports, CI |
 
-## Data provenance
+No measurement, judgement or result was changed while porting the analysis.
 
-* **Expert rankings**: five interviews conducted in 2025. Experts appear as `expert_1` to
-  `expert_5`; no personal data is included.
-* **Test questions and measurements**: 15 German questions; answers, response times and the
-  binary judgements are transcribed verbatim from the evaluation record. Correctness and
-  transparency were judged by one annotator.
-* **Literature criteria**: recency and cost efficiency were scored from published evidence;
-  every sub-criterion lists its sources in
-  [`data/case_study/literature_criteria.yaml`](data/case_study/literature_criteria.yaml), and
-  the report renders them.
-* **Corpus**: the prototypes answered over social-media-style posts about Mercedes-Benz and
-  AMG vehicles. That corpus was largely template-generated (synthetic) with a small share of
-  authentic public posts, and it is not part of this release. No proprietary company data was
-  used anywhere.
+## Scope and limitations
 
----
-
-## Limitations
-
-Five experts and 15 questions are a small sample, sized for an exploratory study in one
-department; the weights reflect that department's priorities. Correctness and transparency
-were judged binarily by a single annotator. Two of the five criteria were not measured but
-scored from the literature, which is disclosed per sub-criterion. The prototypes ran on a
-synthetic corpus, so correctness was judged against corpus content rather than against
-ground truth about the real market. Response times were measured once per question against
-hosted APIs and depend on provider load. The additive utility model assumes preferential
-independence of the criteria. Details in [`docs/limitations.md`](docs/limitations.md); the
-formulas in [`docs/methodology.md`](docs/methodology.md).
-
----
+Five experts and 15 questions per system are a small sample, sized for an exploratory study in one
+department, and the weights express that department's priorities rather than a general preference
+profile. Answer correctness and transparency were judged by a single annotator, so no
+inter-annotator agreement exists. Recency and cost efficiency were scored from published evidence
+rather than measured, which is weaker evidence than the other three criteria. The prototypes
+answered over a largely synthetic corpus, so correctness was judged against corpus content rather
+than against ground truth about the real market. Response times are one observation per question
+against hosted provider APIs and depend on provider load at the time, and both prototypes depend
+on external services whose behaviour can change. The additive model assumes the criteria are
+preferentially independent and does not represent interactions between them. The sensitivity
+analysis probes robustness to the weights, not to any of the above. Detail in
+[`docs/limitations.md`](docs/limitations.md).
 
 ## Reproducing
 
-With [uv](https://docs.astral.sh/uv/):
+Every table and figure in this README is generated from the committed inputs. CI regenerates them
+on Python 3.11 and 3.12 and fails if the committed results drift.
 
 ```bash
 uv sync --extra plots
 uv run rag-ft-eval run data/case_study/config.yaml                     # exact arithmetic -> results/
 uv run rag-ft-eval run data/case_study/config.yaml --rounding thesis --output results/thesis_rounding
-uv run pytest                                                           # 43 offline tests, under one second
+uv run pytest                                                           # 43 offline tests, no API keys
 ```
 
-With pip:
+Without `uv`:
 
 ```bash
 python -m venv venv && source venv/bin/activate
 pip install -r requirements.txt -e .
 rag-ft-eval run data/case_study/config.yaml
-pip install -r requirements-dev.txt && pytest
 ```
 
-`rag-ft-eval weights CONFIG` prints the weights and Kendall's W, `rag-ft-eval sensitivity
-CONFIG` the sensitivity tables, `rag-ft-eval validate CONFIG` checks a configuration and its
-input files without computing anything. CI runs lint, tests and both evaluation modes on
-Python 3.11 and 3.12 and then diffs `results/` against the committed files.
+`rag-ft-eval weights CONFIG` prints the weights and agreement statistics, `rag-ft-eval sensitivity
+CONFIG` the robustness tables, and `rag-ft-eval validate CONFIG` checks a configuration and its
+inputs without computing anything.
 
-### Using it for another comparison
+### Applying it to another comparison
 
-Point a configuration at your own inputs; `data/case_study/config.yaml` documents the schema.
-Expert rankings are a long table `expert_id, metric, rank`; measurements have one row per
-question and system; literature criteria are binary sub-criteria with citation keys. The
-loader validates permutations, 0/1 values, completeness of the question grid and citation
-keys, and fails with a precise message. The Python API mirrors the pipeline:
-`compute_weights`, `build_score_matrix`, `utility`, `sensitivity`.
-
----
+The package is not specific to this case study. Point a configuration at your own inputs;
+[`config.yaml`](data/case_study/config.yaml) documents the schema. Expert rankings are a long
+table of `expert_id, metric, rank`; measurements hold one row per question and system; literature
+criteria are binary sub-criteria with citation keys. The loader rejects non-permutation rankings,
+values outside {0, 1}, incomplete question grids and unresolved citation keys with a precise
+message. The Python API mirrors the pipeline: `compute_weights`, `build_score_matrix`, `utility`,
+`sensitivity`.
 
 ## Repository layout
 
 ```
 src/rag_ft_eval/
-  weights.py       expert rankings -> weights, Kendall's W (chi-square + permutation test)
+  weights.py       expert rankings -> weights; Kendall's W with chi-square and permutation test
   metrics.py       binary, ratio-to-best and literature scores; exact / thesis rounding
-  utility.py       weighted utility and gap decomposition
+  utility.py       weighted additive utility and gap decomposition
   sensitivity.py   leave-one-out, Dirichlet perturbation, rank-reversal thresholds
-  io.py            YAML/CSV loading with validation
+  io.py            configuration and input loading with validation
   evaluate.py      end-to-end run and output writing
   report.py        deterministic Markdown report
-  plots.py         figures (optional matplotlib extra)
+  plots.py         result figures
   cli.py           rag-ft-eval run | weights | sensitivity | validate
-data/case_study/
-  expert_rankings.csv        25 rankings, five experts
-  test_questions.csv         15 questions in three areas
-  measurements.csv           30 rows: answer, latency, correctness, transparency
-  literature_criteria.yaml   sub-criteria for recency and cost efficiency, with sources
-  config.yaml                systems, criteria, rounding and sensitivity settings
-results/                     committed CLI output (exact); results/thesis_rounding/ (thesis)
-tests/                       43 offline tests including the golden test
+data/case_study/   the raw research inputs: rankings, questions, measurements, literature criteria
+results/           committed output, exact arithmetic; results/thesis_rounding/ for the thesis convention
+tests/             43 offline tests, including the golden test that pins results/ to the code
 docs/
-  methodology.md             every formula the package computes
-  limitations.md             what the case study can and cannot support
-  figures/                   thesis figures (German labels; English versions in preparation)
+  methodology.md   every formula the package computes, with references
+  system-design.md configuration of the two prototypes and what was measured how
+  limitations.md   what this study can and cannot support
+  figures/         diagrams used in the documentation
+  thesis_figures/  the original German thesis figures, kept for provenance
 ```
-
-Beyond the figures embedded above, `docs/figures/` also holds `rag-process.png` (the generic
-RAG process: indexing, retrieval, generation), `expert-weighting.png` (the weighting table
-from the thesis), `utility-by-criterion.png` and `stakeholder-alignment-radar.png` (the thesis
-versions of the two result figures, which this repository regenerates from code).
-
----
-
-## Roadmap
-
-* v0.2: reference implementations of the two prototypes (RAG with a local and a managed
-  vector store, fine-tuning through the OpenAI API) with an offline test path, plus a
-  datasheet for the synthetic corpus.
-* Re-run of the case study on freshly collected public data.
-
----
 
 ## Contact
 
-If you are interested in LLM evaluation, multi-criteria decision analysis, or RAG versus
-fine-tuning in practice, I am happy to discuss the research, the method, or the
-implementation.
+If you work on LLM evaluation, human-AI interaction, or decision support for AI system selection,
+I am happy to discuss the method, the study design or the implementation.
 
 Cecilia Nothstein, <Cecilia.Nothstein@gmail.com>
 
-Project thesis, DHBW Stuttgart, 2025. Code and data are released under the MIT license, see
-[`LICENSE`](LICENSE); cite via [`CITATION.cff`](CITATION.cff).
+Project thesis, DHBW Stuttgart, 2025. Released under the MIT license; cite via
+[`CITATION.cff`](CITATION.cff).

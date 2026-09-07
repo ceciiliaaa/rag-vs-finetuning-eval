@@ -5,6 +5,11 @@ This document defines every quantity the package computes. Notation: `m` experts
 important); `s_cj` is the normalised score of system `c` on criterion `j`; `w_j` is the weight of
 criterion `j`.
 
+**Provenance.** Sections 1, 3 and 4 and the leave-one-out analysis for a single criterion follow
+the submitted thesis. The permutation test in section 2, the leave-one-out analysis across all
+criteria, and the weight perturbation and rank-reversal analyses in section 5 were added in this
+repository after submission. The summary table in the README states the same split.
+
 ## 1. Criterion weights from expert rankings
 
 Each expert distributes the ranks `1..n` over the `n` criteria exactly once. The forced ranking
