@@ -239,9 +239,7 @@ docs/
 ## Contact
 
 If you work on LLM evaluation, human-AI interaction, or decision support for AI system selection,
-I am happy to discuss the method, the study design or the implementation.
+I am happy to discuss the method, the study design or the implementation. 🌟
 
 Cecilia Nothstein, <Cecilia.Nothstein@gmail.com>
 
-Project thesis, DHBW Stuttgart, 2025. Released under the MIT license; cite via
-[`CITATION.cff`](CITATION.cff).
