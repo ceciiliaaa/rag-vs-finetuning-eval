@@ -94,12 +94,9 @@ pipeline and the research inputs used to analyse their outputs**, not the protot
 itself; their configuration is documented in [`docs/system-design.md`](docs/system-design.md).
 
 `rag_ft_eval` is a reusable Python package that turns raw evaluation inputs into a decision and
-into a report that can be regenerated from scratch at any time.
-
-![Architecture of the released evaluation package: inputs, validation, weighting and normalisation, utility, sensitivity, reporting, results and CI](docs/figures/evaluation-package-architecture.svg)
-
-Each stage is a separate module with a typed result object, so the pipeline can be driven end to
-end by the CLI or assembled piecewise from Python:
+into a report that can be regenerated from scratch at any time. Each stage is a separate module
+with a typed result object, so the pipeline can be driven end to end by the CLI or assembled
+piecewise from Python:
 
 | Module | Responsibility |
 |---|---|

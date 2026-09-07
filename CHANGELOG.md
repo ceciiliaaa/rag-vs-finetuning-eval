@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.2.2 (2026-09-07)
+
+- The package architecture diagram is removed from the README; the module table below it carried
+  the same information in less space.
+
 ## 0.2.1 (2026-09-07)
 
 Presentation of the result figures. No change to any measurement or numerical result.
