@@ -13,10 +13,10 @@
   <text x="1148" y="32" text-anchor="middle" font-size="13.5" font-weight="700" fill="#343a40">Decision</text>
 
   <!-- systems -->
-  <rect x="26" y="150" width="120" height="52" rx="8" fill="#e7f0f7" stroke="#1f4e79"/>
-  <text x="86" y="182" text-anchor="middle" font-size="16" font-weight="600" fill="#12406b">RAG</text>
-  <rect x="26" y="252" width="120" height="52" rx="8" fill="#fbeceb" stroke="#a4342c"/>
-  <text x="86" y="284" text-anchor="middle" font-size="16" font-weight="600" fill="#8c2b24">Fine-tuning</text>
+  <rect x="26" y="150" width="120" height="52" rx="8" fill="#e9f0f7" stroke="#5b83b0"/>
+  <text x="86" y="182" text-anchor="middle" font-size="16" font-weight="600" fill="#35618c">RAG</text>
+  <rect x="26" y="252" width="120" height="52" rx="8" fill="#f8eef4" stroke="#b57fa8"/>
+  <text x="86" y="284" text-anchor="middle" font-size="16" font-weight="600" fill="#8a5478">Fine-tuning</text>
 
   <!-- criteria -->
   <rect x="180" y="56" width="240" height="330" rx="10" fill="#f8f9fa" stroke="#adb5bd"/>
@@ -53,10 +53,10 @@
 
   <!-- utility analysis -->
   <rect x="770" y="56" width="250" height="330" rx="10" fill="#f8f9fa" stroke="#868e96"/>
-  <rect x="792" y="80" width="206" height="66" rx="8" fill="#e7f0f7" stroke="#1f4e79"/>
-  <text x="895" y="105" text-anchor="middle" font-size="14.5" font-weight="600" fill="#12406b">Stakeholder interviews</text>
-  <text x="895" y="126" text-anchor="middle" font-size="12.5" fill="#12406b">five experts rank the criteria</text>
-  <text x="895" y="140" text-anchor="middle" font-size="12.5" fill="#12406b">Kendall's W = 0.792</text>
+  <rect x="792" y="80" width="206" height="66" rx="8" fill="#e9f0f7" stroke="#5b83b0"/>
+  <text x="895" y="105" text-anchor="middle" font-size="14.5" font-weight="600" fill="#35618c">Stakeholder interviews</text>
+  <text x="895" y="126" text-anchor="middle" font-size="12.5" fill="#35618c">five experts rank the criteria</text>
+  <text x="895" y="140" text-anchor="middle" font-size="12.5" fill="#35618c">Kendall's W = 0.792</text>
   <path d="M895,146 L895,176" stroke="#495057" stroke-width="1.6" marker-end="url(#b)"/>
 
   <rect x="792" y="180" width="206" height="56" rx="8" fill="#eceef0" stroke="#ced4da"/>
@@ -76,8 +76,8 @@
   <rect x="1064" y="150" width="150" height="154" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
   <text x="1139" y="196" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">Utility per</text>
   <text x="1139" y="216" text-anchor="middle" font-size="15" font-weight="600" fill="#212529">system</text>
-  <text x="1139" y="248" text-anchor="middle" font-size="14" fill="#12406b">RAG 0.8461</text>
-  <text x="1139" y="272" text-anchor="middle" font-size="14" fill="#8c2b24">Fine-tuning 0.4171</text>
+  <text x="1139" y="248" text-anchor="middle" font-size="14" fill="#35618c">RAG 0.8461</text>
+  <text x="1139" y="272" text-anchor="middle" font-size="14" fill="#8a5478">Fine-tuning 0.4171</text>
   <path d="M1020,222 L1058,222" stroke="#495057" stroke-width="1.6" marker-end="url(#b)"/>
 
   <text x="620" y="440" text-anchor="middle" font-size="13" fill="#6c757d">Three criteria are measured on the prototypes, two are scored from published evidence, and the stakeholder ranking decides how much each one counts.</text>

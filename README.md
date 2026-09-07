@@ -173,9 +173,15 @@ because it had no retrieval layer to expose, so the criterion the stakeholders r
 settled by an architectural choice. That makes the robustness analysis the more important half of
 the evaluation.
 
+![Stakeholder target profile against the measured score profile of both systems](results/figures/profile_radar.png)
+
+The same result seen as a profile: the dashed line is what the stakeholders asked for, scaled to
+the same range as the scores. RAG covers it on every criterion except response time. Fine-tuning
+exceeds it on response time alone and falls short everywhere else, most visibly on transparency.
+
 ## Robustness
 
-![Leave-one-out utilities and the weight at which fine-tuning would overtake RAG](results/figures/sensitivity.png)
+![Utility of both systems when each criterion is dropped in turn, against the dotted baseline with all criteria included](results/figures/sensitivity.png)
 
 - **Leave one criterion out.** RAG stays ahead in all five cases. The smallest remaining gap is
   0.2069, when transparency is removed and the other weights are rescaled proportionally.

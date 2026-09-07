@@ -1,5 +1,18 @@
 # Changelog
 
+## 0.2.1 (2026-09-07)
+
+Presentation of the result figures. No change to any measurement or numerical result.
+
+- One muted palette across every figure: a deep-blue to pale-rose ramp for the criteria and two
+  colours from the same family for the systems. The SVG diagrams follow the same palette, so the
+  fine-tuning pipeline is no longer drawn in a saturated red.
+- The rank-reversal panel is dropped from the sensitivity figure; it was mostly empty space and the
+  thresholds are stated in the report and the README. The figure is now a single leave-one-out
+  panel.
+- The target-profile radar returns to the README, where it shows the same result as a profile
+  against what the stakeholders asked for.
+
 ## 0.2.0 (2026-09-07)
 
 Presentation, information architecture and public API. No change to any measurement, judgement or

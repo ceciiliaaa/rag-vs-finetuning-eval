@@ -42,13 +42,13 @@
   <text x="590" y="180" text-anchor="middle" font-size="15" font-weight="600" fill="#343a40">Knowledge integration</text>
   <text x="590" y="199" text-anchor="middle" font-size="12.5" fill="#6c757d">the only component that differs between the two variants</text>
 
-  <rect x="440" y="216" width="300" height="60" rx="8" fill="#e7f0f7" stroke="#1f4e79"/>
-  <text x="590" y="240" text-anchor="middle" font-size="15.5" font-weight="600" fill="#12406b">RAG pipeline</text>
-  <text x="590" y="261" text-anchor="middle" font-size="12.5" fill="#12406b">retrieves five posts into the prompt at query time</text>
+  <rect x="440" y="216" width="300" height="60" rx="8" fill="#e9f0f7" stroke="#5b83b0"/>
+  <text x="590" y="240" text-anchor="middle" font-size="15.5" font-weight="600" fill="#35618c">RAG pipeline</text>
+  <text x="590" y="261" text-anchor="middle" font-size="12.5" fill="#35618c">retrieves five posts into the prompt at query time</text>
 
-  <rect x="440" y="290" width="300" height="60" rx="8" fill="#fbeceb" stroke="#a4342c"/>
-  <text x="590" y="314" text-anchor="middle" font-size="15.5" font-weight="600" fill="#8c2b24">Fine-tuning pipeline</text>
-  <text x="590" y="335" text-anchor="middle" font-size="12.5" fill="#8c2b24">posts trained into the model weights beforehand</text>
+  <rect x="440" y="290" width="300" height="60" rx="8" fill="#f8eef4" stroke="#b57fa8"/>
+  <text x="590" y="314" text-anchor="middle" font-size="15.5" font-weight="600" fill="#8a5478">Fine-tuning pipeline</text>
+  <text x="590" y="335" text-anchor="middle" font-size="12.5" fill="#8a5478">posts trained into the model weights beforehand</text>
 
   <path d="M356,260 L404,260" stroke="#495057" stroke-width="1.6" marker-end="url(#a)"/>
 

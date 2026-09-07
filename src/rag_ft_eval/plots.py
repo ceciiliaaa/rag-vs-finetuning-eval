@@ -1,4 +1,8 @@
-"""Figures for an evaluation run (requires the optional ``plots`` extra)."""
+"""Figures for an evaluation run (requires the optional ``plots`` extra).
+
+One muted palette is used everywhere: a deep-blue to pale-rose ramp for the criteria and two
+colours for the systems drawn from the same family, so the figures read as one set.
+"""
 
 from __future__ import annotations
 
@@ -10,8 +14,13 @@ import numpy as np
 if TYPE_CHECKING:
     from .evaluate import EvaluationRun
 
-PALETTE = ["#1f4e79", "#2e86c1", "#5dade2", "#a9cce3", "#d4e6f1", "#7f8c8d"]
-SYSTEM_COLOURS = ["#1f77b4", "#d62728", "#2ca02c", "#9467bd"]
+# criteria ramp: deep blue -> periwinkle -> muted rose
+PALETTE = ["#3f5e8c", "#6b8fb8", "#9a8fbf", "#c08bab", "#e2b6c4"]
+# one colour per system, taken from the same family
+SYSTEM_COLOURS = ["#5b83b0", "#b57fa8", "#7fa88f", "#a89a7f"]
+TARGET_COLOUR = "#6c757d"
+TEXT_COLOUR = "#343a40"
+GRID_COLOUR = "#dee2e6"
 
 
 def _matplotlib():
@@ -24,6 +33,20 @@ def _matplotlib():
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
 
+    plt.rcParams.update(
+        {
+            "font.size": 10,
+            "text.color": TEXT_COLOUR,
+            "axes.labelcolor": TEXT_COLOUR,
+            "axes.edgecolor": "#adb5bd",
+            "xtick.color": TEXT_COLOUR,
+            "ytick.color": TEXT_COLOUR,
+            "axes.spines.top": False,
+            "axes.spines.right": False,
+            "figure.facecolor": "white",
+            "axes.facecolor": "white",
+        }
+    )
     return plt
 
 
@@ -34,33 +57,38 @@ def _labels(run: EvaluationRun) -> tuple[list[str], list[str]]:
 
 
 def plot_weights(run: EvaluationRun, path: Path) -> Path:
+    """Mean importance rank per criterion, with the derived weight annotated."""
     plt = _matplotlib()
     metric_labels, _ = _labels(run)
     w = run.weights
-    fig, ax = plt.subplots(figsize=(7, 3.6))
+    fig, ax = plt.subplots(figsize=(7.2, 3.6))
     y = np.arange(len(metric_labels))
-    ax.barh(y, w.mean, xerr=w.std, color=PALETTE[1], capsize=3)
+    ax.barh(y, w.mean, xerr=w.std, color=PALETTE[1], ecolor="#8d99ae", capsize=3, height=0.62)
     for i, (mean, weight) in enumerate(zip(w.mean, w.weight, strict=True)):
-        ax.text(mean + w.std[i] + 0.08, i, f"weight {100 * weight:.1f} %", va="center", fontsize=9)
+        ax.text(mean + w.std[i] + 0.1, i, f"{100 * weight:.1f} %", va="center", fontsize=9.5)
     ax.set_yticks(y, metric_labels)
     ax.invert_yaxis()
-    ax.set_xlim(0, w.kendall.n_items + 1.6)
-    ax.set_xlabel("Mean importance rank across experts (error bar: SD)")
+    ax.set_xlim(0, w.kendall.n_items + 1.5)
+    ax.set_xlabel("Mean importance rank across experts (error bar: standard deviation)")
     ax.set_title(
         f"Criterion weights from {w.kendall.n_raters} expert rankings "
-        f"(Kendall's W = {w.kendall.w:.3f})"
+        f"(Kendall's W = {w.kendall.w:.3f})",
+        fontsize=11,
     )
+    ax.xaxis.grid(True, color=GRID_COLOUR, linewidth=0.8)
+    ax.set_axisbelow(True)
     fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    fig.savefig(path, dpi=200)
     plt.close(fig)
     return path
 
 
 def plot_contributions(run: EvaluationRun, path: Path) -> Path:
+    """Weighted utility per system, stacked by criterion."""
     plt = _matplotlib()
     metric_labels, system_labels = _labels(run)
     contributions = np.asarray(run.utility.contributions)
-    fig, ax = plt.subplots(figsize=(6, 4.2))
+    fig, ax = plt.subplots(figsize=(6.2, 4.4))
     x = np.arange(len(system_labels))
     bottom = np.zeros(len(system_labels))
     for j, label in enumerate(metric_labels):
@@ -70,126 +98,122 @@ def plot_contributions(run: EvaluationRun, path: Path) -> Path:
             bottom=bottom,
             color=PALETTE[j % len(PALETTE)],
             label=label,
-            width=0.55,
+            width=0.5,
+            edgecolor="white",
+            linewidth=0.8,
         )
         bottom += contributions[:, j]
     for i, total in enumerate(run.utility.totals):
-        ax.text(x[i], total + 0.015, f"{total:.3f}", ha="center", fontsize=10)
-    ax.set_xticks(x, system_labels)
+        ax.text(x[i], total + 0.018, f"{total:.3f}", ha="center", fontsize=11, fontweight="600")
+    ax.set_xticks(x, system_labels, fontsize=11)
     ax.set_ylim(0, 1.0)
     ax.set_ylabel("Weighted utility")
-    ax.set_title(f"Utility by criterion ({run.rounding.value} rounding)")
-    ax.legend(loc="upper right", fontsize=8)
+    ax.set_title(f"Utility by criterion ({run.rounding.value} arithmetic)", fontsize=11)
+    ax.yaxis.grid(True, color=GRID_COLOUR, linewidth=0.8)
+    ax.set_axisbelow(True)
+    ax.legend(loc="upper right", fontsize=8.5, frameon=True, framealpha=0.95, edgecolor=GRID_COLOUR)
     fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    fig.savefig(path, dpi=200)
     plt.close(fig)
     return path
 
 
 def plot_profile(run: EvaluationRun, path: Path) -> Path:
+    """Stakeholder target profile against the measured score profile of each system."""
     plt = _matplotlib()
     metric_labels, system_labels = _labels(run)
     n = len(metric_labels)
     angles = np.linspace(0, 2 * np.pi, n, endpoint=False)
     closed = np.concatenate([angles, angles[:1]])
     target = np.asarray(run.weights.mean) / run.weights.kendall.n_items
-    fig, ax = plt.subplots(figsize=(5.6, 5.2), subplot_kw={"polar": True})
+    scores = np.asarray(run.utility.scores)
+
+    fig = plt.figure(figsize=(8.6, 5.4))
+    ax = fig.add_subplot(111, polar=True)
+    fig.subplots_adjust(left=0.10, right=0.68, top=0.86, bottom=0.10)
     ax.set_theta_offset(np.pi / 2)
     ax.set_theta_direction(-1)
     ax.plot(
         closed,
         np.concatenate([target, target[:1]]),
-        color="#555555",
+        color=TARGET_COLOUR,
         linestyle="--",
+        linewidth=1.6,
         label="Stakeholder target profile",
     )
-    scores = np.asarray(run.utility.scores)
     for i, label in enumerate(system_labels):
         values = np.concatenate([scores[i], scores[i][:1]])
         colour = SYSTEM_COLOURS[i % len(SYSTEM_COLOURS)]
-        ax.plot(closed, values, color=colour, label=label)
-        ax.fill(closed, values, color=colour, alpha=0.15)
-    ax.set_xticks(angles, metric_labels, fontsize=9)
+        ax.plot(closed, values, color=colour, linewidth=2)
+        ax.fill(closed, values, color=colour, alpha=0.22, label=label)
+
+    ax.set_xticks(angles, metric_labels, fontsize=10)
+    ax.tick_params(axis="x", pad=10)
     ax.set_ylim(0, 1)
+    ax.set_rlabel_position(0)
     ax.set_yticks([0.2, 0.4, 0.6, 0.8, 1.0])
-    ax.set_title(
-        "Target profile (mean rank / max rank) versus measured scores", pad=18, fontsize=10
+    ax.set_yticklabels(["0.2", "0.4", "0.6", "0.8", "1.0"], fontsize=8.5, color="#868e96")
+    ax.grid(color=GRID_COLOUR, linewidth=0.8)
+    ax.spines["polar"].set_edgecolor(GRID_COLOUR)
+    fig.suptitle(
+        "Stakeholder target profile versus measured scores", fontsize=11, color=TEXT_COLOUR, y=0.97
     )
-    ax.legend(loc="upper left", bbox_to_anchor=(-0.22, 1.12), fontsize=8)
-    fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    ax.legend(
+        loc="upper left",
+        bbox_to_anchor=(1.10, 1.02),
+        fontsize=9,
+        frameon=True,
+        framealpha=0.95,
+        edgecolor=GRID_COLOUR,
+    )
+    fig.savefig(path, dpi=200)
     plt.close(fig)
     return path
 
 
 def plot_sensitivity(run: EvaluationRun, path: Path) -> Path:
+    """Utility of each system when one criterion is removed and the weights are renormalised."""
     plt = _matplotlib()
-    metric_labels, system_labels = _labels(run)
-    sens = run.sensitivity
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(11, 4))
+    _, system_labels = _labels(run)
+    rows = run.sensitivity.leave_one_out
+    fig, ax = plt.subplots(figsize=(7.6, 4.0))
 
-    x = np.arange(len(sens.leave_one_out))
-    width = 0.8 / len(system_labels)
+    x = np.arange(len(rows))
+    width = 0.74 / len(system_labels)
     for i, label in enumerate(system_labels):
-        totals = [row.totals[i] for row in sens.leave_one_out]
-        ax1.bar(
-            x + (i - (len(system_labels) - 1) / 2) * width,
+        totals = [row.totals[i] for row in rows]
+        offset = (i - (len(system_labels) - 1) / 2) * width
+        ax.bar(
+            x + offset,
             totals,
             width,
             label=label,
             color=SYSTEM_COLOURS[i % len(SYSTEM_COLOURS)],
+            edgecolor="white",
+            linewidth=0.8,
         )
     for i, total in enumerate(run.utility.totals):
-        ax1.axhline(
-            total, color=SYSTEM_COLOURS[i % len(SYSTEM_COLOURS)], linestyle=":", linewidth=1
+        ax.axhline(
+            total,
+            color=SYSTEM_COLOURS[i % len(SYSTEM_COLOURS)],
+            linestyle=":",
+            linewidth=1.4,
+            alpha=0.9,
         )
-    ax1.set_xticks(
-        x,
-        [run.inputs.metric_labels[row.dropped_metric] for row in sens.leave_one_out],
-        rotation=20,
-        ha="right",
-        fontsize=8,
-    )
-    ax1.set_ylim(0, 1)
-    ax1.set_ylabel("Utility with criterion removed")
-    ax1.set_title("Leave one criterion out (dotted: baseline)")
-    ax1.legend(fontsize=8)
 
-    current = [row.current_weight for row in sens.rank_reversal]
-    thresholds = [
-        row.threshold_weight if row.threshold_weight is not None else np.nan
-        for row in sens.rank_reversal
-    ]
-    y = np.arange(len(current))
-    ax2.scatter(current, y, color="#333333", label="current weight", zorder=3)
-    ax2.scatter(thresholds, y, color="#d62728", marker="|", s=200, label="rank reversal", zorder=3)
-    for i in range(len(current)):
-        if not np.isnan(thresholds[i]):
-            ax2.annotate(
-                "",
-                xy=(thresholds[i], i),
-                xytext=(current[i], i),
-                arrowprops={"arrowstyle": "->", "color": "#999999"},
-            )
-        else:
-            ax2.text(
-                current[i] + 0.03,
-                i,
-                "no reversal possible",
-                va="center",
-                fontsize=8,
-                color="#666666",
-            )
-    ax2.set_yticks(y, metric_labels, fontsize=8)
-    ax2.invert_yaxis()
-    ax2.set_xlim(0, 1)
-    ax2.set_xlabel("Weight of the criterion")
-    ax2.set_title(
-        f"Weight at which {run.inputs.system_labels[sens.baseline_runner_up]} would overtake"
+    ax.set_xticks(x, [run.inputs.metric_labels[row.dropped_metric] for row in rows], fontsize=9)
+    ax.set_ylim(0, 1)
+    ax.set_ylabel("Utility with the criterion removed")
+    ax.set_xlabel("Criterion left out, remaining weights renormalised")
+    ax.set_title(
+        "How the ranking holds up when one criterion is dropped (dotted: all criteria included)",
+        fontsize=11,
     )
-    ax2.legend(fontsize=8, loc="lower right")
+    ax.yaxis.grid(True, color=GRID_COLOUR, linewidth=0.8)
+    ax.set_axisbelow(True)
+    ax.legend(fontsize=9, frameon=True, framealpha=0.95, edgecolor=GRID_COLOUR)
     fig.tight_layout()
-    fig.savefig(path, dpi=150)
+    fig.savefig(path, dpi=200)
     plt.close(fig)
     return path
 
