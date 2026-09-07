@@ -2,7 +2,18 @@
 
 ## 0.2.0 (2026-09-07)
 
-Presentation and information architecture, no change to any measurement, judgement or result.
+Presentation, information architecture and public API. No change to any measurement, judgement or
+numerical result.
+
+- Public API exposed from the package root (`from rag_ft_eval import load_config, run_evaluation`),
+  with `__all__` and a test that pins the exported surface.
+- README restructured around the released software: an architecture figure of the evaluation
+  package, the module responsibilities, the tech stack and a programmatic usage example come before
+  the study design.
+- Sections `Key contributions`, `Repository extension beyond the thesis` and `Scope and limitations`
+  removed from the README. The provenance content moved to `docs/provenance.md`; the methodological
+  constraints stay in `docs/limitations.md`, linked from the robustness discussion.
+- Badges restored (CI, Python, license).
 
 - README repositioned as a research artifact: research question, study design, results,
   robustness, scope conditions. Tutorial-level explanations of RAG and fine-tuning removed.
@@ -29,4 +40,4 @@ Presentation and information architecture, no change to any measurement, judgeme
   output, figures.
 - Case-study inputs (five expert rankings, 15 test questions with both systems' answers,
   literature criteria with sources) and committed results in both rounding modes.
-- 43 offline tests including a golden test; CI regenerates `results/` and fails on any drift.
+- 46 offline tests including a golden test; CI regenerates `results/` and fails on any drift.

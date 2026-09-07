@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from typing import TYPE_CHECKING
 
-from . import __version__
+from ._version import __version__
 from .schema import MetricKind, Rounding
 
 if TYPE_CHECKING:

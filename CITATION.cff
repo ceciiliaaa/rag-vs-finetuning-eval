@@ -5,7 +5,7 @@ title: "rag-ft-eval: stakeholder-weighted utility analysis for comparing LLM dom
 authors:
   - family-names: Nothstein
     given-names: Cecilia
-version: 0.1.0
+version: 0.2.0
 date-released: 2026-09-07
 license: MIT
 repository-code: "https://github.com/ceciiliaaa/rag-vs-finetuning-eval"

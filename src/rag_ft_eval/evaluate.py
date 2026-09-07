@@ -10,7 +10,7 @@ from typing import Any
 
 import numpy as np
 
-from . import __version__
+from ._version import __version__
 from .io import EvaluationInputs
 from .metrics import build_score_matrix
 from .report import render_report

@@ -7,7 +7,7 @@ import sys
 from collections.abc import Sequence
 from pathlib import Path
 
-from . import __version__
+from ._version import __version__
 from .evaluate import run_evaluation, write_outputs
 from .io import ConfigError, load_config
 from .schema import Rounding

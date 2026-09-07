@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 880" width="920" height="880" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif">
+  <rect width="920" height="880" fill="#ffffff"/>
+  <defs>
+    <marker id="d" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#495057"/>
+    </marker>
+  </defs>
+
+  <!-- entry points -->
+  <rect x="24" y="134" width="62" height="594" rx="8" fill="#f8f9fa" stroke="#adb5bd"/>
+  <text transform="rotate(-90 55 431)" x="55" y="431" text-anchor="middle" font-size="14" font-weight="600" fill="#343a40">rag-ft-eval CLI  ·  Python API</text>
+
+  <!-- inputs -->
+  <rect x="250" y="16" width="520" height="88" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="510" y="44" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">Configuration and raw inputs</text>
+  <text x="510" y="68" text-anchor="middle" font-size="13" fill="#495057">config.yaml · expert_rankings.csv · measurements.csv</text>
+  <text x="510" y="88" text-anchor="middle" font-size="13" fill="#495057">literature_criteria.yaml</text>
+  <path d="M510,104 L510,130" stroke="#495057" stroke-width="1.6" marker-end="url(#d)"/>
+
+  <!-- validation -->
+  <rect x="210" y="134" width="600" height="88" rx="8" fill="#e7f0f7" stroke="#1f4e79"/>
+  <text x="510" y="162" text-anchor="middle" font-size="15.5" font-weight="600" fill="#12406b">io.py · schema.py — loading and validation</text>
+  <text x="510" y="186" text-anchor="middle" font-size="13" fill="#12406b">rejects non-permutation rankings, values outside {0, 1},</text>
+  <text x="510" y="206" text-anchor="middle" font-size="13" fill="#12406b">incomplete question grids and unresolved citation keys</text>
+
+  <path d="M400,222 L400,236 L335,236 L335,248" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#d)"/>
+  <path d="M620,222 L620,236 L685,236 L685,248" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#d)"/>
+
+  <!-- weights / metrics -->
+  <rect x="180" y="252" width="310" height="88" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="335" y="280" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">weights.py</text>
+  <text x="335" y="304" text-anchor="middle" font-size="13" fill="#495057">stakeholder weights, Kendall's W,</text>
+  <text x="335" y="324" text-anchor="middle" font-size="13" fill="#495057">permutation test</text>
+
+  <rect x="530" y="252" width="310" height="88" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="685" y="280" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">metrics.py</text>
+  <text x="685" y="304" text-anchor="middle" font-size="13" fill="#495057">criterion normalisation,</text>
+  <text x="685" y="324" text-anchor="middle" font-size="13" fill="#495057">exact and thesis rounding</text>
+
+  <path d="M335,340 L335,356 L440,356 L440,372" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#d)"/>
+  <path d="M685,340 L685,356 L580,356 L580,372" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#d)"/>
+
+  <!-- utility -->
+  <rect x="310" y="376" width="400" height="76" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="510" y="404" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">utility.py</text>
+  <text x="510" y="430" text-anchor="middle" font-size="13" fill="#495057">weighted additive utility, gap decomposition</text>
+  <path d="M510,452 L510,478" stroke="#495057" stroke-width="1.6" marker-end="url(#d)"/>
+
+  <!-- sensitivity -->
+  <rect x="310" y="482" width="400" height="76" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="510" y="510" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">sensitivity.py</text>
+  <text x="510" y="536" text-anchor="middle" font-size="13" fill="#495057">leave-one-out, Dirichlet perturbation, rank reversal</text>
+
+  <path d="M440,558 L440,574 L335,574 L335,590" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#d)"/>
+  <path d="M580,558 L580,574 L685,574 L685,590" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#d)"/>
+
+  <!-- report / plots -->
+  <rect x="180" y="594" width="310" height="72" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="335" y="622" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">report.py</text>
+  <text x="335" y="646" text-anchor="middle" font-size="13" fill="#495057">deterministic Markdown</text>
+
+  <rect x="530" y="594" width="310" height="72" rx="8" fill="#f1f3f5" stroke="#adb5bd"/>
+  <text x="685" y="622" text-anchor="middle" font-size="15.5" font-weight="600" fill="#212529">plots.py</text>
+  <text x="685" y="646" text-anchor="middle" font-size="13" fill="#495057">result figures</text>
+
+  <path d="M335,666 L335,684 L440,684 L440,700" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#d)"/>
+  <path d="M685,666 L685,684 L580,684 L580,700" stroke="#495057" stroke-width="1.6" fill="none" marker-end="url(#d)"/>
+
+  <!-- results -->
+  <rect x="250" y="704" width="520" height="72" rx="8" fill="#e7f0f7" stroke="#1f4e79"/>
+  <text x="510" y="732" text-anchor="middle" font-size="15.5" font-weight="600" fill="#12406b">results/</text>
+  <text x="510" y="756" text-anchor="middle" font-size="13" fill="#12406b">JSON · report.md · figures, committed to the repository</text>
+  <path d="M510,776 L510,798" stroke="#495057" stroke-width="1.6" marker-end="url(#d)"/>
+
+  <!-- ci -->
+  <rect x="210" y="802" width="600" height="60" rx="8" fill="#f8f9fa" stroke="#868e96" stroke-dasharray="5 4"/>
+  <text x="510" y="827" text-anchor="middle" font-size="15" font-weight="600" fill="#343a40">pytest · golden test · GitHub Actions</text>
+  <text x="510" y="849" text-anchor="middle" font-size="13" fill="#495057">CI regenerates results/ on every push and fails if the output drifts</text>
+</svg>

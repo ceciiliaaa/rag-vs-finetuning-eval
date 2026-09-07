@@ -1,6 +1,6 @@
 [project]
 name = "rag-ft-eval"
-version = "0.1.0"
+version = "0.2.0"
 description = "Stakeholder-weighted utility analysis for comparing LLM domain-adaptation strategies, with a RAG vs. fine-tuning case study"
 readme = "README.md"
 requires-python = ">=3.11"
