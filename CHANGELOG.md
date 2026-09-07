@@ -1,5 +1,11 @@
 # Changelog
 
+Development history of this repository. The study it evaluates was carried out in 2025; the
+entries below cover the reimplementation of its analysis as tested software, and the reference
+pipelines added afterwards. No entry changes a measurement, a judgement or a reported result.
+
+---
+
 ## 0.3.0 (2026-09-07)
 
 Reference implementations of the two compared pipelines. No change to the evaluation framework,

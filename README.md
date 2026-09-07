@@ -271,6 +271,17 @@ rag-ft-eval run data/case_study/config.yaml
 CONFIG` the robustness tables, and `rag-ft-eval validate CONFIG` checks a configuration and its
 inputs without computing anything.
 
+To check that the committed results really are the output of this code, regenerate them somewhere
+else and compare:
+
+```bash
+uv run rag-ft-eval run data/case_study/config.yaml --output /tmp/check --no-plots
+diff -r --exclude=thesis_rounding /tmp/check results
+```
+
+`diff` reports nothing. Start with [`results/report.md`](results/report.md): it carries every
+number in this README, together with the counts and statistics each one was derived from.
+
 The thesis reported 0.8453 and 0.4167 because intermediate values were rounded before aggregation;
 `--rounding thesis` reproduces that convention exactly. Ranking and interpretation are the same in
 both modes, and the details are in [`docs/provenance.md`](docs/provenance.md).
@@ -321,3 +332,7 @@ If you work on LLM evaluation, human-AI interaction, or decision support for AI 
 I am happy to discuss the method, the study design or the implementation. 🌟
 
 Cecilia Nothstein, <Cecilia.Nothstein@gmail.com>
+
+Released under the MIT licence, see [`LICENSE`](LICENSE); if you build on the method or the data,
+please cite via [`CITATION.cff`](CITATION.cff). The corpus the prototypes answered over and the
+frontend source are not part of this release.
