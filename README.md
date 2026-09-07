@@ -3,9 +3,8 @@
 **A reproducible stakeholder-weighted evaluation of retrieval-augmented generation and supervised
 fine-tuning for domain-specific question answering**
 
-> Project thesis by **Cecilia Nothstein**<br>
-> DHBW Stuttgart, Business Information Systems<br>
-> Conducted in cooperation with **Mercedes-AMG** @ Portfolio Strategy & Market Intelligence
+> Research Project @ **Mercedes-AMG**, Market Intelligence<br>
+> by **Cecilia Nothstein**, July 2025<br>
 
 A department that wants a question-answering assistant over its customer feedback has to pick a
 domain-adaptation strategy, and accuracy alone does not decide it. Whether an analyst can see
