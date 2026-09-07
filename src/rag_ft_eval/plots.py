@@ -139,13 +139,25 @@ def plot_profile(run: EvaluationRun, path: Path) -> Path:
         color=TARGET_COLOUR,
         linestyle="--",
         linewidth=1.6,
+        marker="o",
+        markersize=3.4,
         label="Stakeholder target profile",
     )
     for i, label in enumerate(system_labels):
         values = np.concatenate([scores[i], scores[i][:1]])
         colour = SYSTEM_COLOURS[i % len(SYSTEM_COLOURS)]
-        ax.plot(closed, values, color=colour, linewidth=2)
-        ax.fill(closed, values, color=colour, alpha=0.22, label=label)
+        ax.plot(
+            closed,
+            values,
+            color=colour,
+            linewidth=2,
+            marker="o",
+            markersize=5,
+            markeredgecolor="white",
+            markeredgewidth=0.9,
+            zorder=3 + i,
+        )
+        ax.fill(closed, values, color=colour, alpha=0.18, label=label, zorder=2 + i)
 
     ax.set_xticks(angles, metric_labels, fontsize=10)
     ax.tick_params(axis="x", pad=10)

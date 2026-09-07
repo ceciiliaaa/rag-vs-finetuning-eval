@@ -177,7 +177,8 @@ the evaluation.
 
 The same result seen as a profile: the dashed line is what the stakeholders asked for, scaled to
 the same range as the scores. RAG covers it on every criterion except response time. Fine-tuning
-exceeds it on response time alone and falls short everywhere else, most visibly on transparency.
+exceeds it on response time alone and falls short everywhere else. Its marker on the transparency
+axis sits at the centre because it scored 0, none of its 15 answers came with traceable sources.
 
 ## Robustness
 
