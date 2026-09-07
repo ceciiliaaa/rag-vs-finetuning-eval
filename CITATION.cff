@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+type: software
+title: "rag-ft-eval: stakeholder-weighted utility analysis for comparing LLM domain-adaptation strategies"
+authors:
+  - family-names: Nothstein
+    given-names: Cecilia
+version: 0.1.0
+date-released: 2026-09-07
+license: MIT
+repository-code: "https://github.com/ceciiliaaa/rag-vs-finetuning-eval"
+abstract: >-
+  A small, tested Python package and CLI for multi-criteria (utility-analysis) evaluation of
+  LLM systems with stakeholder-derived weights, Kendall's W agreement testing and sensitivity
+  analysis. Ships a case study comparing retrieval-augmented generation with fine-tuning for
+  domain specialisation of GPT-3.5 in a business question-answering setting.

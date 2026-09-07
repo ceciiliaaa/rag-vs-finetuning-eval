@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Environments
+.venv/
+venv/
+env/
+.env
+.env.*
+!.env.example
+
+# Editors and OS
+.idea/
+.vscode/
+.DS_Store
+.claude/
+
+# Data and model artefacts that must never be committed
+*.pkl
+*.pickle
+*.faiss
+*.index
+*.bin
+*.safetensors
+chroma_db/
+models/
+logs/
