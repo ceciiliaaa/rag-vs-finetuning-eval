@@ -35,10 +35,10 @@ case study are not included in this release (see roadmap).
 
 ## Case study at a glance
 
-Two prototypes were built on the same corpus of social-media-style posts about a car brand:
+Two prototypes were built on the same corpus of social-media-style posts about Mercedes-Benz and AMG vehicles:
 a RAG assistant (sentence-transformer embeddings, managed vector index, top-5 retrieval,
 GPT-3.5-Turbo generation) and a GPT-3.5-Turbo model fine-tuned through the provider's API.
-Five domain experts from the portfolio-strategy department of a premium automotive manufacturer
+Five domain experts from the portfolio-strategy and market-intelligence department of Mercedes-AMG
 ranked five criteria; both prototypes answered the same 15 test questions in three categories
 (market and competition, customer sentiment, product and technology).
 
@@ -117,7 +117,7 @@ keys, and fails with a precise message. The Python API mirrors the pipeline:
 * **Literature criteria**: recency and cost efficiency were not measured but scored from
   published evidence; every sub-criterion lists its sources, and the report renders them.
 * **Corpus and prototypes are not included.** The corpus the prototypes answered over consisted
-  of social-media-style posts about a car brand and was largely template-generated (synthetic),
+  of social-media-style posts about Mercedes-Benz and AMG vehicles and was largely template-generated (synthetic),
   with a small share of authentic public posts. No proprietary company data was used.
 
 The limitations that follow from this design are spelled out in
@@ -146,8 +146,8 @@ docs/              methodology and limitations
 ## Context and citation
 
 This code grew out of a cooperative-study thesis (DHBW Stuttgart, business informatics, 2025)
-that compared RAG and fine-tuning for a question-answering assistant over customer feedback at a
-premium automotive manufacturer. The repository is a standalone reimplementation of the
+that compared RAG and fine-tuning for a question-answering assistant over social-media customer
+feedback at Mercedes-AMG (portfolio strategy and market intelligence). The repository is a standalone reimplementation of the
 evaluation method with the study's inputs as a worked example. Cite it via
 [`CITATION.cff`](CITATION.cff).
 

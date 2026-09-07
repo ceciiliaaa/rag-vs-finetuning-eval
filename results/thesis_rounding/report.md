@@ -1,6 +1,6 @@
 # Evaluation report: RAG vs. fine-tuning for a domain-specific question-answering assistant
 
-Context: a premium automotive manufacturer (portfolio-strategy department), 2025
+Context: Mercedes-AMG, portfolio strategy and market intelligence department, 2025
 Rounding mode: `thesis` (rounding convention of the original write-up (intermediate values rounded)).
 
 ## 1. Criterion weights from expert rankings

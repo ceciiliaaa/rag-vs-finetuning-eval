@@ -13,8 +13,8 @@ worked example of the method, not as a general verdict on RAG versus fine-tuning
   prototypes; they were scored from published evidence on binary sub-criteria. The sources are
   listed with each sub-criterion so that the judgement can be contested.
 * **Synthetic corpus.** The prototypes answered questions over a corpus of social-media-style
-  posts about a car brand that was largely template-generated, with a small share of authentic
-  public posts. Correctness was judged against the corpus content, not against ground truth about
+  posts about Mercedes-Benz and AMG vehicles that was largely template-generated, with a small
+  share of authentic public posts. Correctness was judged against the corpus content, not against ground truth about
   the real market. The corpus and the prototypes are not part of this release.
 * **Latency.** Each question was timed once per system on a developer machine against hosted
   APIs; the values depend on provider load and network conditions at the time.

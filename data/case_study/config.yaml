@@ -1,16 +1,17 @@
 # Case study: RAG vs. fine-tuning for domain specialisation of GPT-3.5 in a business
-# question-answering setting (social-media customer feedback about a car brand).
+# question-answering setting (social-media customer feedback about Mercedes-Benz and AMG).
 # Paths are relative to this file.
 
 case_study:
   name: rag-vs-finetuning
   title: "RAG vs. fine-tuning for a domain-specific question-answering assistant"
-  organisation: "a premium automotive manufacturer (portfolio-strategy department)"
+  organisation: "Mercedes-AMG, portfolio strategy and market intelligence department"
   year: 2025
   description: >-
-    Two prototype assistants were built on the same corpus of social-media posts about a car
-    brand: one with retrieval-augmented generation (sentence-transformer embeddings, a managed
-    vector index, top-5 retrieval, GPT-3.5-Turbo generation) and one with a GPT-3.5-Turbo model
+    Two prototype assistants were built on the same corpus of social-media posts about
+    Mercedes-Benz and AMG vehicles: one with retrieval-augmented generation (sentence-transformer
+    embeddings, a managed vector index, top-5 retrieval, GPT-3.5-Turbo generation) and one with a
+    GPT-3.5-Turbo model
     fine-tuned through the provider's API. Five domain experts ranked the evaluation criteria;
     both prototypes answered the same 15 test questions.
 
