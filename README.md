@@ -56,6 +56,17 @@ ones from a Pinecone index and displayed them next to the answer. The fine-tunin
 GPT-3.5-Turbo instance on question-answer pairs from the same posts and answered without
 retrieval.
 
+### The RAG variant at query time
+
+![RAG at query time: the corpus is indexed once; the question is embedded, the nearest posts are retrieved and concatenated into the prompt, and the model answers from it](docs/figures/rag-process.svg)
+
+Indexing runs once. At query time the question is embedded into the same vector space, the five
+nearest posts are retrieved and concatenated with the question into the prompt, and the model
+answers from that prompt. Those five posts are also displayed next to the answer, which is exactly
+what the transparency criterion measures and what the fine-tuning variant has no equivalent of.
+
+### Criterion weights
+
 Five practitioners with at least three years in portfolio and market strategy ranked the criteria
 by forced ranking, which avoids the "everything is important" pattern of rating scales. Questions,
 answers, response times and judgements are committed verbatim in
