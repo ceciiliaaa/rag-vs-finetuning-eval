@@ -13,6 +13,8 @@ right context.
 
 ![Architecture of the two prototypes](figures/prototype-architecture.svg)
 
+Screenshots of the finished interface are in the README. The figures in them are placeholders, replaced for data-protection reasons.
+
 ## Shared components
 
 | Component | Configuration |

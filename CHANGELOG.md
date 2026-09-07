@@ -18,6 +18,7 @@ the case-study inputs or any committed result.
   released, and the sample is not a subset of it.
 - New optional extras `rag` and `openai`. Neither is installed in CI.
 - 29 new offline tests, 75 in total.
+- Two screenshots of the finished prototype interface added to the README, under a notice that every figure in them is a fabricated placeholder, replaced for data-protection reasons before the screenshots left the company. The frontend source is not released.
 
 ## 0.2.2 (2026-09-07)
 

@@ -65,6 +65,23 @@ nearest posts are retrieved and concatenated with the question into the prompt, 
 answers from that prompt. Those five posts are also displayed next to the answer, which is exactly
 what the transparency criterion measures and what the fine-tuning variant has no equivalent of.
 
+### The prototype interface
+
+> **Every figure in the two screenshots below is a fabricated placeholder.** The real values were
+> replaced for data-protection reasons before the screenshots left the company, so the sentiment
+> scores, topic scores, model rankings and response times shown here are illustrative and mean
+> nothing. The numbers this study rests on are in [Results](#results) and are regenerated from
+> [`results/`](results) on every push. The frontend source is not part of this release.
+
+![Overview screen of the prototype: a question box over the corpus, with sentiment, topic and model summary cards below](docs/figures/ui-overview.jpg)
+
+![Comparison screen: the same question answered by the RAG system and the fine-tuning system side by side, each with its language, the number of posts used and the response time](docs/figures/ui-comparison.jpg)
+
+The second screen is where the evaluation happened. Both systems answered the same question in
+one place, and the response time and the number of retrieved posts were read off per run. The RAG
+card lists the posts behind its answer; the fine-tuning card has nothing to list, which is the
+transparency criterion in one picture.
+
 ### Criterion weights
 
 Five practitioners with at least three years in portfolio and market strategy ranked the criteria
@@ -291,7 +308,7 @@ docs/
   system-design.md configuration of the two prototypes and what was measured how
   limitations.md   what this study can and cannot support
   provenance.md    what came from the thesis, what this repository added, and the rounding modes
-  figures/         English diagrams used in the documentation
+  figures/         English diagrams, plus the two interface screenshots
   thesis_figures/  the original German thesis figures, kept for provenance
 ```
 
